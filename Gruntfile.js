@@ -125,7 +125,7 @@ module.exports = function(grunt) {
                     spawn: true,
                     livereload: true
                 },
-                files: ['index.jade', 'src/views/**'],
+                files: ['locals.json', 'index.jade', 'src/views/**'],
                 tasks: ['jade', 'appcache']
             },
         }
