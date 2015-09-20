@@ -1,0 +1,3 @@
+define('empty test suite', () => {
+    
+});
