@@ -1,0 +1,15 @@
+doctype html
+html(manifest='appcache.manifest',ng-app='pcomm')
+  head
+    title pComm: Portable Communicator
+    base(href='')
+    meta(name='viewport',content='width=device-width, initial-scale=1')
+  body
+    header
+        h1= title
+    main
+        ng-view
+    footer
+        small Copyright &copy; 2015 pComm
+    script(src='js/index.js')
+    script(src='//localhost:35729/livereload.js')

@@ -1,0 +1,41 @@
+{
+  "name": "pcomm",
+  "version": "1.0.0",
+  "description": "Backendless communications platform",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dandart/pcomm.git"
+  },
+  "keywords": [
+    "comms",
+    "communications",
+    "facebook",
+    "twitter"
+  ],
+  "author": "Dan Dart <github@dandart.co.uk>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dandart/pcomm/issues"
+  },
+  "homepage": "https://github.com/dandart/pcomm#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babelify": "^6.3.0",
+    "chai": "^3.2.0",
+    "grunt": "^0.4.5",
+    "grunt-appcache": "^0.1.8",
+    "grunt-babel": "^5.0.2",
+    "grunt-browserify": "^4.0.1",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-jade": "^0.15.0",
+    "grunt-contrib-uglify": "^0.9.2",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-eslint": "^17.1.0",
+    "grunt-mocha": "^0.4.13",
+    "grunt-sass": "^1.0.0",
+    "load-grunt-tasks": "^3.2.0"
+  }
+}
