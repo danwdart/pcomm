@@ -18,31 +18,46 @@ module.exports = function(grunt) {
         //    
         //}
         browserify: {
-            all: {
-                options: {
-                    sourceMap: true,
-                    transform: [
-                        [
-                            'babelify',
-                            {
-                                stage: 0
-                            }
-                        ]
+            options: {
+                debug: true,
+                sourceMap: true,
+                transform: [
+                    [
+                        'babelify',
+                        {
+                            stage: 0
+                        }
                     ]
-                },
+                ]
+            },
+            app: {
                 files: {
                     'compiled/index.js': 'src/js/index.js'
                 }
             }
         },
         uglify: {
-            all: {
+            app: {
                 options: {
                     sourceMap: true
                 },
                 files: {
                     'js/index.js': [
                         'compiled/index.js'
+                    ]
+                }
+            },
+            external: {
+                options: {
+                    sourceMap: true
+                },
+                files: {
+                    'js/external.js': [
+                        'bower_components/angular/angular.min.js',
+                        'bower_components/angular-route/angular-route.min.js',
+                        'bower_components/angular-facebook/lib/angular-facebook.js',
+                        'bower_components/jquery/dist/jquery.min.js',
+                        'bower_components/bootstrap/dist/js/bootstrap.js'                        
                     ]
                 }
             }
@@ -90,11 +105,14 @@ module.exports = function(grunt) {
                     patterns: [
                         'index.html',
                         'css/index.css',
-                        'js/index.js',
+                        'js/**/*.js',
                         'img/**/*',
-                        'views/**/*.html'
+                        'views/**/*.html',
+                        'bower_components/bootstrap/dist/css/bootstrap.min.css',
+                        'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
                     ]
-                }
+                },
+                network: ['*']
             }
         },
         watch: {
@@ -102,15 +120,24 @@ module.exports = function(grunt) {
                 options: {
                     reload: true
                 },
-                files: ['*.js', '*.json']
+                files: ['*.js', '*.json'],
+                tasks: ['clean', 'browserify', 'uglify', 'sass', 'jade', 'appcache']
             },
             js: {
                 options: {
                     spawn: true,
                     livereload: true
                 },
-                files: ['bower_components/**/*.js', 'src/js/**/*.js', 'ext/**/*.js'],
-                tasks: [/*'eslint',*/ 'browserify', 'uglify', 'appcache'],
+                files: ['src/js/**/*.js'],
+                tasks: [/*'eslint',*/ 'browserify:app', 'uglify:app', 'appcache'],
+            },
+            jsexternal: {
+                options: {
+                    spawn: true,
+                    livereload: true
+                },
+                files: ['bower_components/**/*.js'],
+                tasks: ['uglify:external','appcache']
             },
             css: {
                 options: {

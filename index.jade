@@ -3,13 +3,28 @@ html(manifest='appcache.manifest',ng-app='pcomm')
   head
     title pComm: Portable Communicator
     base(href='')
-    meta(name='viewport',content='width=device-width, initial-scale=1')
+    meta(name='viewport',content='width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no')
+    link(rel='stylesheet',type='text/css',href='bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet',type='text/css',href='bower_components/bootstrap/dist/css/bootstrap-theme.min.css')
+    link(rel='stylesheet',type='text/css',href='css/index.css')
   body
-    header
-        h1= title
-    main
-        ng-view
-    footer
+    .container-fluid
+      header.row
+        nav.col-lg-12
+          ul.nav.nav-tabs
+            li.active
+              a(href='#/') Home
+            li
+              a(href='#/new') New Message
+            li
+              a(href='#/accounts') Accounts
+            li
+              a(href='#/settings') Settings
+        input.form-control#search(type='search')
+      main.row
+        ng-view.col-lg-12
+      footer.row
         small Copyright &copy; 2015 pComm
-    script(src='js/index.js')
+    script(src='/js/external.js')
+    script(src='/js/index.js')
     script(src='//localhost:35729/livereload.js')
