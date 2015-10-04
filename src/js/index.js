@@ -1,11 +1,9 @@
 // Let's just require the dependencies
-import 'babel/polyfill';
-
-import * as angular from '../../bower_components/angular';
-import '../../bower_components/angular-route'
+// No dependencies - there was hell here
+require('babel/polyfill');
 
 // and the app
 import App from './lib/app';
 
-let app = new App(angular);
-app.start(angular);
+let app = new App(angular, jQuery);
+app.start();

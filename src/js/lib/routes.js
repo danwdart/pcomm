@@ -1,8 +1,12 @@
 import IndexCtrl from '../controllers/IndexCtrl';
-import SampleCtrl from '../controllers/SampleCtrl';
+import AccountsCtrl from '../controllers/AccountsCtrl';
+import AuthenticationCtrl from '../controllers/AuthenticationCtrl';
+import NewMessageCtrl from '../controllers/NewMessageCtrl';
+import MessageCtrl from '../controllers/MessageCtrl';
+import SettingsCtrl from '../controllers/SettingsCtrl';
 import NotFoundCtrl from '../controllers/NotFoundCtrl';
 
-export default function Routes(ngApp)
+export default function Routes(ngApp, jQuery)
 {
     ngApp.config(
         [
@@ -17,16 +21,50 @@ export default function Routes(ngApp)
                         controllerAs: 'index'
                     }
                 ).when(
-                    '/sample/:id',
+                    '/accounts',
                     {
-                        templateUrl: 'views/sample.html',
-                        controller: 'SampleCtrl',
-                        controllerAs: 'sample'
+                        templateUrl: 'views/accounts.html',
+                        controller: 'AccountsCtrl',
+                        controllerAs: 'accounts'
                     }
                 ).when(
-                    '*',
+                    '/new',
                     {
-                        templateUrl: 'views/404.html',
+                        templateUrl: 'views/newmessage.html',
+                        controller: 'NewMessageCtrl',
+                        controllerAs: 'newmessage'
+                    }
+                ).when(
+                    '/message/:id',
+                    {
+                        templateUrl: 'views/message.html',
+                        controller: 'MessageCtrl',
+                        controllerAs: 'message'
+                    }
+                ).when(
+                    '/accounts',
+                    {
+                        templateUrl: 'views/accounts.html',
+                        controller: 'AccountsCtrl',
+                        controllerAs: 'accounts'
+                    }
+                ).when(
+                    '/authentication',
+                    {
+                        templateUrl: 'views/authentication.html',
+                        controller: 'AuthenticationCtrl',
+                        controllerAs: 'authentication'
+                    }
+                ).when(
+                    '/settings',
+                    {
+                        templateUrl: 'views/settings.html',
+                        controller: 'SettingsCtrl',
+                        controllerAs: 'settings'
+                    }
+                ).otherwise(
+                    {
+                        templateUrl: 'views/notfound.html',
                         controller: 'NotFoundCtrl',
                         controllerAs: 'notfound'
                     }
@@ -40,7 +78,18 @@ export default function Routes(ngApp)
             }
         ]
     )
-    .controller('IndexCtrl', ['$scope', IndexCtrl])
-    .controller('SampleCtrl', ['$scope', SampleCtrl])
-    .controller('NotFoundCtrl', ['$scope', NotFoundCtrl]);
+    .config([
+        'FacebookProvider',
+        (FacebookProvider) => {
+            FacebookProvider.init('109359476083346');
+        }
+    ])
+    .controller('AuthenticationCtrl', ['$scope', 'Facebook', AuthenticationCtrl])
+    .controller('IndexCtrl', ['$scope', 'jQuery', IndexCtrl])
+    .controller('NotFoundCtrl', ['$scope', 'jQuery', NotFoundCtrl])
+    .controller('AccountsCtrl', ['$scope', 'jQuery', AccountsCtrl])
+    .controller('NewMessageCtrl', ['$scope', 'jQuery', NewMessageCtrl])
+    .controller('MessageCtrl', ['$scope', 'jQuery', MessageCtrl])
+    .controller('SettingsCtrl', ['$scope', 'jQuery', SettingsCtrl])
+    .factory('jQuery', () => jQuery);
 };
