@@ -3,11 +3,9 @@ module.exports = function(grunt) {
         clean: {
             all: {
                 src: [
-                    'js/**/*.js',
+                    'app/**/*',
                     'compiled/**/*',
-                    'css/**/*.css',
-                    'views/**/*.jade',
-                    'index.html'
+                    'public/**/*',
                 ]
             }
         },
@@ -17,6 +15,18 @@ module.exports = function(grunt) {
         //mocha: {
         //    
         //}
+        babel: {
+            app: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/app',
+                        src: ['**/*.js'],
+                        dest: 'app'
+                    }
+                ]
+            }
+        },
         browserify: {
             options: {
                 debug: true,
@@ -32,7 +42,7 @@ module.exports = function(grunt) {
             },
             app: {
                 files: {
-                    'compiled/index.js': 'src/js/index.js'
+                    'compiled/index.js': 'src/public/js/index.js'
                 }
             }
         },
@@ -42,7 +52,7 @@ module.exports = function(grunt) {
                     sourceMap: true
                 },
                 files: {
-                    'js/index.js': [
+                    'public/js/index.js': [
                         'compiled/index.js'
                     ]
                 }
@@ -52,7 +62,7 @@ module.exports = function(grunt) {
                     sourceMap: true
                 },
                 files: {
-                    'js/external.js': [
+                    'public/js/external.js': [
                         'bower_components/angular/angular.min.js',
                         'bower_components/angular-route/angular-route.min.js',
                         'bower_components/angular-facebook/lib/angular-facebook.js',
@@ -68,29 +78,49 @@ module.exports = function(grunt) {
             },
             all: {
                 files: {
-                    'css/index.css': ['src/css/**/*.scss']
+                    'public/css/index.css': ['src/public/css/**/*.scss']
                 }
             }
         },
-        /** TODO css min with deps **/
+        cssmin: {
+            options: {
+                shorthandCompacting: true,
+                roundingPrecision: -1
+            },
+            app: {
+                files: {
+                    'public/css/index.min.css': [
+                        'public/css/index.css'
+                    ]
+                }
+            },
+            external: {
+                files: {
+                    'public/css/external.min.css': [
+                        'bower_components/bootstrap/dist/css/bootstrap.min.css',
+                        'bower_components/bootstrap/dist/css/bootstrap-theme.min.css'
+                    ]
+                }
+            }
+        },
         jade: {
             all: {
                 options: {
                     data: function(dest, src) {
-                        return require('./locals.json')
+                        return require('./config/locals.json')
                     }
                 },
                 files: [
                     {
-                        cwd: 'src/views',
+                        cwd: 'src/public/views',
                         src: '**/*.jade',
-                        dest: 'views',
+                        dest: 'public/views',
                         expand: true,
                         ext: '.html'
                     },
                     {
-                        src: 'index.jade',
-                        dest: 'index.html'
+                        src: 'src/public/index.jade',
+                        dest: 'public/index.html'
                     }
                 ]
             }
@@ -100,19 +130,27 @@ module.exports = function(grunt) {
 
             },
             all: {
-                dest: 'appcache.manifest',
+                dest: 'public/appcache.manifest',
                 cache: {
                     patterns: [
-                        'index.html',
-                        'css/index.css',
-                        'js/**/*.js',
-                        'img/**/*',
-                        'views/**/*.html',
+                        'public/index.html',
+                        'public/css/index.css',
+                        'public/js/**/*.js',
+                        'public/img/**/*',
+                        'public/views/**/*.html',
                         'bower_components/bootstrap/dist/css/bootstrap.min.css',
                         'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
                     ]
                 },
                 network: ['*']
+            }
+        },
+        forever: {
+            server: {
+                options: {
+                    index: 'app/server.js',
+                    logDir: 'logs'
+                }
             }
         },
         watch: {
@@ -123,12 +161,19 @@ module.exports = function(grunt) {
                 files: ['*.js', '*.json'],
                 tasks: ['clean', 'browserify', 'uglify', 'sass', 'jade', 'appcache']
             },
-            js: {
+            app: {
+                options: {
+                    spawn: true
+                },
+                files: ['src/app/**/*.js'],
+                tasks: ['forever:server:stop', 'forever:server:start']
+            },
+            jspublic: {
                 options: {
                     spawn: true,
                     livereload: true
                 },
-                files: ['src/js/**/*.js'],
+                files: ['src/public/js/**/*.js'],
                 tasks: [/*'eslint',*/ 'browserify:app', 'uglify:app', 'appcache'],
             },
             jsexternal: {
@@ -144,15 +189,23 @@ module.exports = function(grunt) {
                     spawn: true,
                     livereload: true
                 },
-                files: 'src/css/**',
-                tasks: ['sass', 'appcache']
+                files: 'src/public/css/**',
+                tasks: ['sass', 'cssmin:app', 'appcache']
+            },
+            cssexternal: {
+                options: {
+                    spawn: true,
+                    livereload: true
+                },
+                files: 'bower_components/**/*.css',
+                tasks: ['cssmin:external', 'appcache']
             },
             views: {
                 options: {
                     spawn: true,
                     livereload: true
                 },
-                files: ['locals.json', 'index.jade', 'src/views/**'],
+                files: ['config/locals.json', 'src/public/index.jade', 'src/public/views/**'],
                 tasks: ['jade', 'appcache']
             },
         }
@@ -160,5 +213,20 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('default', ['clean', /*'eslint',*/ 'browserify', 'uglify', 'sass', 'jade', 'appcache']);
+    grunt.registerTask(
+        'default', [
+            'clean',
+            'babel',
+            /*'eslint',*/
+            'browserify',
+            'uglify',
+            'sass',
+            'cssmin',
+            'jade',
+            'appcache'
+        ]
+    );
+    grunt.registerTask('start', ['forever:server:start']);
+    grunt.registerTask('stop', ['forever:server:stop']);
+    grunt.registerTask('restart', ['forever:server:restart']);
 }
