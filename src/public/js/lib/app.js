@@ -10,7 +10,7 @@ export default class App
 
     start()
     {
-        this._ngApp = this._angular.module('pcomm', ['ngRoute', 'facebook']);
+        this._ngApp = this._angular.module('pcomm', ['ngRoute']);
         this.setupRoutes();
     }
 
