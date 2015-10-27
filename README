@@ -1,3 +1,7 @@
 pComm: Portable Communicator
 
-To include: webcomponents/polymer
+To include: webcomponents/polymer/grunt-angular-templates
+
+to build: grunt
+to start: grunt start
+to watch: grunt watch

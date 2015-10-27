@@ -30,7 +30,7 @@ export default function($scope, jQuery)
     let sample = new Promise((resolve,reject) => {
         setTimeout(() => {
             resolve('hi');
-        });
+        }, 1000);
     });
 
     async () => {

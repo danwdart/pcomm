@@ -1,8 +1,6 @@
 /node_modules
 /bower_components
 /compiled
-/js
-/css
-/views
-/index.html
+/public
+/app
 /appcache.manifest

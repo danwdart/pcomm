@@ -1,6 +1,5 @@
 import IndexCtrl from '../controllers/IndexCtrl';
 import AccountsCtrl from '../controllers/AccountsCtrl';
-import AuthenticationCtrl from '../controllers/AuthenticationCtrl';
 import NewMessageCtrl from '../controllers/NewMessageCtrl';
 import MessageCtrl from '../controllers/MessageCtrl';
 import SettingsCtrl from '../controllers/SettingsCtrl';
@@ -49,13 +48,6 @@ export default function Routes(ngApp, jQuery)
                         controllerAs: 'accounts'
                     }
                 ).when(
-                    '/authentication',
-                    {
-                        templateUrl: 'views/authentication.html',
-                        controller: 'AuthenticationCtrl',
-                        controllerAs: 'authentication'
-                    }
-                ).when(
                     '/settings',
                     {
                         templateUrl: 'views/settings.html',
@@ -78,13 +70,6 @@ export default function Routes(ngApp, jQuery)
             }
         ]
     )
-    .config([
-        'FacebookProvider',
-        (FacebookProvider) => {
-            FacebookProvider.init('109359476083346');
-        }
-    ])
-    .controller('AuthenticationCtrl', ['$scope', 'Facebook', AuthenticationCtrl])
     .controller('IndexCtrl', ['$scope', 'jQuery', IndexCtrl])
     .controller('NotFoundCtrl', ['$scope', 'jQuery', NotFoundCtrl])
     .controller('AccountsCtrl', ['$scope', 'jQuery', AccountsCtrl])
