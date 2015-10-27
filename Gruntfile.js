@@ -1,11 +1,15 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         clean: {
-            all: {
+            public: {
                 src: [
-                    'app/**/*',
                     'compiled/**/*',
                     'public/**/*',
+                ]
+            },
+            server: {
+                src: [
+                    'app/**/*'
                 ]
             }
         },
@@ -65,7 +69,6 @@ module.exports = function(grunt) {
                     'public/js/external.js': [
                         'bower_components/angular/angular.min.js',
                         'bower_components/angular-route/angular-route.min.js',
-                        'bower_components/angular-facebook/lib/angular-facebook.js',
                         'bower_components/jquery/dist/jquery.min.js',
                         'bower_components/bootstrap/dist/js/bootstrap.js'                        
                     ]
@@ -159,14 +162,29 @@ module.exports = function(grunt) {
                     reload: true
                 },
                 files: ['*.js', '*.json'],
-                tasks: ['clean', 'browserify', 'uglify', 'sass', 'jade', 'appcache']
+                tasks: [
+                    'clean',
+                    'browserify',
+                    'babel',
+                    'uglify',
+                    'sass',
+                    'jade',
+                    'appcache',
+                    'forever:server:stop',
+                    'forever:server:start'
+                ]
             },
             app: {
                 options: {
                     spawn: true
                 },
                 files: ['src/app/**/*.js'],
-                tasks: ['forever:server:stop', 'forever:server:start']
+                tasks: [
+                    'clean:server',
+                    'babel',
+                    'forever:server:stop',
+                    'forever:server:start'
+                ]
             },
             jspublic: {
                 options: {
@@ -174,7 +192,12 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: ['src/public/js/**/*.js'],
-                tasks: [/*'eslint',*/ 'browserify:app', 'uglify:app', 'appcache'],
+                tasks: [
+                    /*'eslint',*/
+                    'browserify:app',
+                    'uglify:app',
+                    'appcache'
+                ],
             },
             jsexternal: {
                 options: {
@@ -226,7 +249,28 @@ module.exports = function(grunt) {
             'appcache'
         ]
     );
+
+    grunt.registerTask(
+        'app', [
+            'clean',
+            'babel',
+            /*'eslint',*/
+            'browserify:app',
+            'uglify:app',
+            'sass',
+            'cssmin:app',
+            'jade',
+            'appcache'
+        ]
+    );
+
     grunt.registerTask('start', ['forever:server:start']);
     grunt.registerTask('stop', ['forever:server:stop']);
-    grunt.registerTask('restart', ['forever:server:restart']);
+    grunt.registerTask(
+        'restart',
+        [
+            'forever:server:stop',
+            'forever:server:start'
+        ]
+    );
 }
