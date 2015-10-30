@@ -152,7 +152,11 @@ module.exports = function(grunt) {
             server: {
                 options: {
                     index: 'app/server.js',
-                    logDir: 'logs'
+                    logDir: 'logs',
+                    errFile: 'pcomm.err',
+                    outFile: 'pcomm.out',
+                    logFile: 'forever.out',
+                    
                 }
             }
         },
