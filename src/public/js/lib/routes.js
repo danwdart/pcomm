@@ -1,5 +1,7 @@
 import HeaderCtrl from '../controllers/HeaderCtrl';
 import IndexCtrl from '../controllers/IndexCtrl';
+import LoginCtrl from '../controllers/LoginCtrl';
+import RegisterCtrl from '../controllers/RegisterCtrl';
 import AccountsCtrl from '../controllers/AccountsCtrl';
 import NewMessageCtrl from '../controllers/NewMessageCtrl';
 import MessageCtrl from '../controllers/MessageCtrl';
@@ -18,6 +20,20 @@ export default (ngApp, jQuery) => {
                         templateUrl: 'views/index.html',
                         controller: 'IndexCtrl',
                         controllerAs: 'index'
+                    }
+                ).when(
+                    '/login',
+                    {
+                        templateUrl: 'views/login.html',
+                        controller: 'LoginCtrl',
+                        controllerAs: 'login'
+                    }
+                ).when(
+                    '/register',
+                    {
+                        templateUrl: 'views/register.html',
+                        controller: 'RegisterCtrl',
+                        controllerAs: 'register'
                     }
                 ).when(
                     '/accounts',
@@ -70,8 +86,10 @@ export default (ngApp, jQuery) => {
             }
         ]
     )
-    .controller('HeaderCtrl', ['$scope', '$location', HeaderCtrl])
+    .controller('HeaderCtrl', ['$scope', '$location', '$http', HeaderCtrl])
     .controller('IndexCtrl', ['$scope', 'jQuery', IndexCtrl])
+    .controller('LoginCtrl', ['$scope', 'jQuery', LoginCtrl])
+    .controller('RegisterCtrl', ['$scope', 'jQuery', RegisterCtrl])
     .controller('NotFoundCtrl', ['$scope', 'jQuery', NotFoundCtrl])
     .controller('AccountsCtrl', ['$scope', 'jQuery', AccountsCtrl])
     .controller('NewMessageCtrl', ['$scope', 'jQuery', NewMessageCtrl])

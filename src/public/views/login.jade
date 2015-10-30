@@ -1,0 +1,11 @@
+.col-lg-12
+    h1 Login
+    form.form-horizontal
+        .form-group
+            label.control-label Username
+            input(type='text',placeholder='Enter Username',ng-model='username')
+        .form-group
+            label.control-label Password
+            input(type='password',placeholder='Enter Password',ng-model='password')
+        .form-group
+            button(class='btn btn-primary',ng-click='login()') Login

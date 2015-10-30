@@ -19,6 +19,12 @@ html(manifest='appcache.manifest',ng-app='pcomm')
               a(href='#/accounts') Accounts
             li(ng-class="{active: isActive('/settings')}")
               a(href='#/settings') Settings
+            li(ng-class="{active: isActive('/login')}",ng-show='!isLoggedIn')
+              a(href='#/login') Login
+            li(ng-class="{active: isActive('/register')}",ng-show='!isLoggedIn')
+              a(href='#/register') Register
+            li(ng-show='isLoggedIn')
+              a(href="#/",ng-click="logout()") Logout
         input.form-control#search(type='search',placeholder='Search...')
       main.row
         ng-view.col-lg-12
