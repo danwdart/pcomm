@@ -1,7 +1,7 @@
 import User from '../lib/Model/User';
 import passwordhash from 'password-hash';
 
-export function LoginCtrl(req, res) {
+export async function LoginCtrl(req, res) {
     let user = await User.findOne({username: req.post.username});
 
     if (!user)
@@ -15,13 +15,13 @@ export function LoginCtrl(req, res) {
     return res.status(204);
 };
 
-export function RegisterCtrl(req, res) {
+export async function RegisterCtrl(req, res) {
     let user = await User.findOne({username: req.post.username}).exec();
     
     if (user)
         return res.status(400).send({error:'User exists'});
     
-    let user = new User();
+    user = new User();
     user.username = req.post.username;
     user.password = passwordhash.generate(
         req.post.password,
