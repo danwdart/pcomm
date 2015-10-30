@@ -1,14 +1,13 @@
-export default (req, res) => {
+function sample() {
+    return new Promise(
+        (resolve,reject) => setTimeout(
+            () => resolve('Hi'), 1000
+        )
+    );
+}
 
-    let sample = new Promise((resolve,reject) => {
-        setTimeout(() => {
-            resolve('hi');
-        }, 1000);
-    });
-
-    async () => {
-        let that = await sample();
-        console.log(that);
-    }
-    return res.send('Hello World!');
+export default async (req, res) => {
+    let that = await sample();
+    console.log(that);
+    return res.send(that);
 };

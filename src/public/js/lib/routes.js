@@ -1,3 +1,4 @@
+import HeaderCtrl from '../controllers/HeaderCtrl';
 import IndexCtrl from '../controllers/IndexCtrl';
 import AccountsCtrl from '../controllers/AccountsCtrl';
 import NewMessageCtrl from '../controllers/NewMessageCtrl';
@@ -5,8 +6,7 @@ import MessageCtrl from '../controllers/MessageCtrl';
 import SettingsCtrl from '../controllers/SettingsCtrl';
 import NotFoundCtrl from '../controllers/NotFoundCtrl';
 
-export default function Routes(ngApp, jQuery)
-{
+export default (ngApp, jQuery) => {
     ngApp.config(
         [
             '$routeProvider',
@@ -70,6 +70,7 @@ export default function Routes(ngApp, jQuery)
             }
         ]
     )
+    .controller('HeaderCtrl', ['$scope', '$location', HeaderCtrl])
     .controller('IndexCtrl', ['$scope', 'jQuery', IndexCtrl])
     .controller('NotFoundCtrl', ['$scope', 'jQuery', NotFoundCtrl])
     .controller('AccountsCtrl', ['$scope', 'jQuery', AccountsCtrl])

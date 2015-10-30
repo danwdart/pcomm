@@ -27,14 +27,12 @@ export default function($scope, jQuery)
         }
     ];
 
-    let sample = new Promise((resolve,reject) => {
-        setTimeout(() => {
-            resolve('hi');
-        }, 1000);
-    });
+    let sample = () => new Promise((resolve,reject) => 
+        setTimeout(() => resolve('hi'), 1000)
+    );
 
     async () => {
         let that = await sample();
         console.log(that);
-    }
+    }();
 };
