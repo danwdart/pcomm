@@ -1,9 +1,8 @@
-// Let's just require the dependencies
-// No dependencies - there was hell here
 import 'babel/polyfill';
 
 // and the app
 import App from './lib/app';
 
-let app = new App(angular, jQuery);
+// we're using included deps now
+let app = new App(angular, jQuery, io);
 app.start();
