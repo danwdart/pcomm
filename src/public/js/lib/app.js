@@ -1,4 +1,5 @@
-import Routes from './routes';
+import routes from './routes';
+import globals from './globals';
 
 export default class App
 {
@@ -11,11 +12,7 @@ export default class App
     start()
     {
         this._ngApp = this._angular.module('pcomm', ['ngRoute']);
-        this.setupRoutes();
-    }
-
-    setupRoutes()
-    {
-        Routes(this._ngApp, this._jQuery);
+        routes(this._ngApp, this._jQuery);
+        globals(this.jQuery);
     }
 }

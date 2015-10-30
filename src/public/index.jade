@@ -8,18 +8,18 @@ html(manifest='appcache.manifest',ng-app='pcomm')
     link(rel='stylesheet',type='text/css',href='css/index.min.css')
   body
     .container-fluid
-      header.row
+      header.row(ng-controller='HeaderCtrl')
         nav.col-lg-12
           ul.nav.nav-tabs
-            li.active
+            li(ng-class="{active: isActive('/')}")
               a(href='#/') Home
-            li
+            li(ng-class="{active: isActive('/new')}")
               a(href='#/new') New Message
-            li
+            li(ng-class="{active: isActive('/accounts')}")
               a(href='#/accounts') Accounts
-            li
+            li(ng-class="{active: isActive('/settings')}")
               a(href='#/settings') Settings
-        input.form-control#search(type='search')
+        input.form-control#search(type='search',placeholder='Search...')
       main.row
         ng-view.col-lg-12
       footer.row
