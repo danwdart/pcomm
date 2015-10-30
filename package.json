@@ -41,6 +41,7 @@
     "grunt-forever": "^0.4.7",
     "grunt-mocha": "^0.4.13",
     "grunt-sass": "^1.0.0",
-    "load-grunt-tasks": "^3.2.0"
+    "load-grunt-tasks": "^3.2.0",
+    "node-xmpp-client": "^2.0.2"
   }
 }
