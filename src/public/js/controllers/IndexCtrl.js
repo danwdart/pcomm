@@ -1,5 +1,4 @@
-export default function($scope, jQuery)
-{
+export default ($scope, jQuery) => {
     $scope.sample = 'sample';
 
     $scope.select = (id) => {

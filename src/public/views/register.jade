@@ -1,0 +1,14 @@
+.col-lg-12
+    h1 Register
+    form.form-horizontal
+        .form-group
+            label.control-label Username
+            input(type='text',placeholder='Enter username',ng-model='username')
+        .form-group
+            label.control-label Password
+            input(type='password',placeholder='Enter password',ng-model='password')
+        .form-group
+            label.control-label Password (again)
+            input(type='password',placeholder='Enter password again',ng-model='password2')
+        .form-group
+            button(class='btn btn-primary',ng-click='register()') Register

@@ -1,12 +1,16 @@
 import 'babel/polyfill';
 import express from 'express';
 import http from 'http';
+import sessions from 'client-sessions';
 import socketio from 'socket.io';
 import XmppClient from 'node-xmpp-client';
 import config from '../config/app.json';
 import routes from './lib/routes';
 import ioroutes from './lib/ioroutes';
 import bgroutes from './lib/bgroutes';
+
+// db setup
+import './lib/db';
 
 let app = express(),
     server = http.Server(app),
@@ -15,13 +19,22 @@ let app = express(),
         config.port:
         process.env['PORT'];
 
+app.use(express.static(__dirname + '/../public'));
+
+app.use(sessions({
+    cookieName: 'session',
+    secret: 'YouShouldProbablyReplaceThisBecauseItsASecurityRisk',
+    duration: 24 * 60 * 60 * 1000,
+    activeDuration: 1000 * 60 * 5,
+    httpOnly: true,
+    ephemeral: false
+}));
+
 routes(app);
 
 ioroutes(io, XmppClient);
 
 bgroutes();
-
-app.use(express.static(__dirname + '/../public'));
 
 server.listen(
     port,
