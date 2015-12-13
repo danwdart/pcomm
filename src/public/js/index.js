@@ -1,4 +1,4 @@
-import 'babel/polyfill';
+import 'babel-polyfill';
 
 // and the app
 import App from './lib/app';
