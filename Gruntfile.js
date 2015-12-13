@@ -20,6 +20,15 @@ module.exports = function(grunt) {
         //    
         //}
         babel: {
+            options: {
+                presets: [
+                    'es2015',
+                    'stage-0'
+                ],
+                plugins: [
+                    'syntax-async-functions'
+                ]
+            },
             app: {
                 files: [
                     {
@@ -31,46 +40,105 @@ module.exports = function(grunt) {
                 ]
             }
         },
+        copy: {
+            external: {
+                files: [
+                    {
+                        cwd: '',
+                        flatten: true,
+                        expand: true,
+                        src: [
+                            'bower_components/angular/angular.js',
+                            'bower_components/angular-route/angular-route.js',
+                            'bower_components/jquery/dist/jquery.js',
+                            'bower_components/bootstrap/dist/js/bootstrap.js'            
+                        ],
+                        dest: 'public/src/external/'
+                    }
+                ]
+            },
+            js: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/public/js',
+                        src: ['**/*.js'],
+                        dest: 'public/src/js'
+                    }
+                ]
+            },
+            css: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/public/css',
+                        src: ['**/*.scss'],
+                        dest: 'public/src/css'
+                    }
+                ]
+            }
+        },
         browserify: {
             options: {
-                debug: true,
-                sourceMap: true,
+                browserifyOptions: {
+                    debug: true,
+                    sourceMaps: true
+                },
                 transform: [
                     [
                         'babelify',
                         {
-                            stage: 0
+                            presets: [
+                                'es2015',
+                                'stage-0'
+                            ],
+                            plugins: [
+                                'syntax-async-functions'
+                            ]
                         }
                     ]
-                ]
+                ]/*
+                plugin: [
+                    [
+                        'minifyify'
+                    ]
+                ]*/
             },
             app: {
                 files: {
-                    'compiled/index.js': 'src/public/js/index.js'
+                    'public/js/index.js': 'public/src/js/index.js'
+                    //'compiled/index.js': 'src/public/js/index.js'
                 }
             }
         },
-        uglify: {
+        exorcise: {
             app: {
                 options: {
-                    sourceMap: true
+                    root: 'public',
+                    base: 'public'
                 },
                 files: {
-                    'public/js/index.js': [
-                        'compiled/index.js'
-                    ]
+                    'public/js/index.js.map': ['public/js/index.js']
                 }
-            },
+            }
+        },
+        /* Until I find a way to persist sourcemaps we're not compressing the client JS */
+        /* Source map root does not work with uglify yet */
+        /*
+        uglify: {
             external: {
-                options: {
-                    sourceMap: true
-                },
+            }
+        },
+        */
+        concat: {
+            external: {
                 files: {
                     'public/js/external.js': [
-                        'bower_components/angular/angular.min.js',
-                        'bower_components/angular-route/angular-route.min.js',
-                        'bower_components/jquery/dist/jquery.min.js',
-                        'bower_components/bootstrap/dist/js/bootstrap.js'                        
+                        /* These must be in the right order of deps for now */
+                        'public/src/external/jquery.js',
+                        'public/src/external/bootstrap.js',
+                        'public/src/external/angular.js',
+                        'public/src/external/angular-route.js'
                     ]
                 }
             }
@@ -81,7 +149,7 @@ module.exports = function(grunt) {
             },
             all: {
                 files: {
-                    'public/css/index.css': ['src/public/css/**/*.scss']
+                    'public/css/index.css': ['public/src/css/**/*.scss']
                 }
             }
         },
@@ -168,9 +236,11 @@ module.exports = function(grunt) {
                 files: ['*.js', '*.json'],
                 tasks: [
                     'clean',
+                    'copy',
                     'browserify',
                     'babel',
-                    'uglify',
+                    'exorcise',
+                    'concat',
                     'sass',
                     'jade',
                     'appcache',
@@ -198,8 +268,9 @@ module.exports = function(grunt) {
                 files: ['src/public/js/**/*.js'],
                 tasks: [
                     /*'eslint',*/
+                    'copy:js',
                     'browserify:app',
-                    'uglify:app',
+                    'exorcise:app',
                     'appcache'
                 ],
             },
@@ -209,7 +280,7 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: ['bower_components/**/*.js'],
-                tasks: ['uglify:external','appcache']
+                tasks: ['concat','appcache']
             },
             css: {
                 options: {
@@ -217,7 +288,7 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: 'src/public/css/**',
-                tasks: ['sass', 'cssmin:app', 'appcache']
+                tasks: ['copy:css', 'sass', 'cssmin:app', 'appcache']
             },
             cssexternal: {
                 options: {
@@ -243,10 +314,12 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'default', [
             'clean',
+            'copy',
             'babel',
             /*'eslint',*/
             'browserify',
-            'uglify',
+            'exorcise',
+            'concat',
             'sass',
             'cssmin',
             'jade',
@@ -257,10 +330,11 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'app', [
             'clean',
+            'copy',
             'babel',
             /*'eslint',*/
             'browserify:app',
-            'uglify:app',
+            'exorcise:app',
             'sass',
             'cssmin:app',
             'jade',
