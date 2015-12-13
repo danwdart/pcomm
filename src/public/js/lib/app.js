@@ -16,6 +16,6 @@ export default class App
         this._ngApp = this._angular.module('pcomm', ['ngRoute']);
         routes(this._ngApp, this._jQuery);
         ioroutes(this._io);
-        globals(this.jQuery);
+        globals(this._jQuery);
     }
 }
