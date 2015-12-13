@@ -18,63 +18,54 @@ export default (ngApp, jQuery) => {
                     '/',
                     {
                         templateUrl: 'views/index.html',
-                        controller: 'IndexCtrl',
-                        controllerAs: 'index'
+                        controller: 'IndexCtrl'
                     }
                 ).when(
                     '/login',
                     {
                         templateUrl: 'views/login.html',
-                        controller: 'LoginCtrl',
-                        controllerAs: 'login'
+                        controller: 'LoginCtrl'
                     }
                 ).when(
                     '/register',
                     {
                         templateUrl: 'views/register.html',
-                        controller: 'RegisterCtrl',
-                        controllerAs: 'register'
+                        controller: 'RegisterCtrl'
                     }
                 ).when(
                     '/accounts',
                     {
                         templateUrl: 'views/accounts.html',
-                        controller: 'AccountsCtrl',
-                        controllerAs: 'accounts'
+                        controller: 'AccountsCtrl'
                     }
                 ).when(
                     '/new',
                     {
                         templateUrl: 'views/newmessage.html',
-                        controller: 'NewMessageCtrl',
-                        controllerAs: 'newmessage'
+                        controller: 'NewMessageCtrl'
                     }
                 ).when(
                     '/message/:id',
                     {
                         templateUrl: 'views/message.html',
-                        controller: 'MessageCtrl',
-                        controllerAs: 'message'
+                        controller: 'MessageCtrl'
                     }
                 ).when(
                     '/accounts',
                     {
                         templateUrl: 'views/accounts.html',
-                        controller: 'AccountsCtrl',
-                        controllerAs: 'accounts'
+                        controller: 'AccountsCtrl'
                     }
                 ).when(
                     '/settings',
                     {
                         templateUrl: 'views/settings.html',
-                        controller: 'SettingsCtrl',
-                        controllerAs: 'settings'
+                        controller: 'SettingsCtrl'
                     }
                 ).otherwise(
                     {
                         templateUrl: 'views/notfound.html',
-                        controller: 'NotFoundCtrl',
-                        controllerAs: 'notfound'
+                        controller: 'NotFoundCtrl'
                     }
                 );
 
@@ -88,7 +79,7 @@ export default (ngApp, jQuery) => {
     )
     .controller('HeaderCtrl', ['$scope', '$location', '$http', HeaderCtrl])
     .controller('IndexCtrl', ['$scope', 'jQuery', IndexCtrl])
-    .controller('LoginCtrl', ['$scope', 'jQuery', LoginCtrl])
+    .controller('LoginCtrl', ['$scope', '$http', 'jQuery', LoginCtrl])
     .controller('RegisterCtrl', ['$scope', 'jQuery', RegisterCtrl])
     .controller('NotFoundCtrl', ['$scope', 'jQuery', NotFoundCtrl])
     .controller('AccountsCtrl', ['$scope', 'jQuery', AccountsCtrl])
