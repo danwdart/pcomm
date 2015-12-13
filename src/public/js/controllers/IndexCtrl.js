@@ -30,8 +30,10 @@ export default ($scope, jQuery) => {
         setTimeout(() => resolve('hi'), 1000)
     );
 
-    async () => {
+    let go = async () => {
         let that = await sample();
         console.log(that);
-    }();
+    };
+    
+    go();
 };
