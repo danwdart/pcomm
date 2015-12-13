@@ -16,7 +16,7 @@ export async function LoginCtrl(req, res) {
 };
 
 export async function RegisterCtrl(req, res) {
-    let user = await User.findOne({username: req.post.username}).exec();
+    let user = await User.findOne({username: req.post.username});
     
     if (user)
         return res.status(400).send({error:'User exists'});
