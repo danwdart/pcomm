@@ -1,6 +1,6 @@
 .col-lg-12
     h1 Login
-    form.form-horizontal
+    form.form-horizontal(ng-submit='login()')
         .form-group
             label.control-label Username
             input(type='text',placeholder='Enter Username',ng-model='username')
@@ -8,4 +8,7 @@
             label.control-label Password
             input(type='password',placeholder='Enter Password',ng-model='password')
         .form-group
-            button(class='btn btn-primary',ng-click='login()') Login
+            label.control-label.text-warning(ng-show='showInvalid') Sorry, your credentials were invalid.
+            label.control-label.text-danger(ng-show='showError') Sorry, there was an error.
+        .form-group
+            input(type='submit',value='Login',class='btn btn-primary')
