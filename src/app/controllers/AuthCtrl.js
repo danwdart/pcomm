@@ -2,12 +2,12 @@ import User from '../lib/Model/User';
 import passwordhash from 'password-hash';
 
 export async function LoginCtrl(req, res) {
-    let user = await User.findOne({username: req.post.username});
+    let user = await User.findOne({username: req.body.username});
 
     if (!user)
         return res.status(401).send({error: 'Invalid Credentials'});
 
-    if (!passwordhash.verify(req.post.password, user.password)) 
+    if (!passwordhash.verify(req.body.password, user.password)) 
         return res.status(401).send({error: 'Invalid Cdedentials'});
     
     req.session.user = user;
@@ -22,9 +22,9 @@ export async function RegisterCtrl(req, res) {
         return res.status(400).send({error:'User exists'});
     
     user = new User();
-    user.username = req.post.username;
+    user.username = req.body.username;
     user.password = passwordhash.generate(
-        req.post.password,
+        req.body.password,
         {
             algorithm: 'sha512'
         }
