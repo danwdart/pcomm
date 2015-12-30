@@ -12,6 +12,7 @@ import NotFoundCtrl from '../controller/notfoundctrl';
 
 import LoginService from '../service/loginservice';
 import RegisterService from '../service/registerservice';
+import SettingsService from '../service/settingsservice';
 
 export default (ngApp, jQuery) => {
     ngApp.config(
@@ -115,9 +116,10 @@ export default (ngApp, jQuery) => {
     .controller('AccountsCtrl', ['$scope', 'jQuery', AccountsCtrl])
     .controller('ComposeCtrl', ['$scope', 'jQuery', ComposeCtrl])
     .controller('MessageCtrl', ['$scope', 'jQuery', MessageCtrl])
-    .controller('SettingsCtrl', ['$scope', 'jQuery', SettingsCtrl])
+    .controller('SettingsCtrl', ['$scope', 'settings', 'jQuery', SettingsCtrl])
     
     .factory('jQuery', () => jQuery)
     .factory('login', ['$http', LoginService])
-    .factory('register', ['$http', RegisterService]);
+    .factory('register', ['$http', RegisterService])
+    .factory('settings', ['$http', SettingsService]);
 };
