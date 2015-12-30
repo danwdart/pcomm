@@ -1,4 +1,16 @@
 {
     "port": 3000,
-    "ip": "0.0.0.0"
+    "ip": "0.0.0.0",
+    "oauth": {
+        "facebook": {
+            "clientID": "431625730372378",
+            "clientSecret": "c5ab2ee092b238cb1f6396df8a617057",
+            "callbackURL": "https://pcomm-dandart.c9users.io/auth/facebook/callback"
+        },
+        "twitter": {
+            "consumerKey": "jSI8zfsneEXrbzYtUXg5p32Cj",
+            "consumerSecret": "xrsHEkgSu9AqFlVloJWLhVMLv0I8GjlvWPhpWaP6nFqd1ve2rn",
+            "callbackURL": "https://pcomm-dandart.c9users.io/auth/twitter/callback"
+        }
+    }
 }
