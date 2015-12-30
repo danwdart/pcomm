@@ -120,11 +120,11 @@
                             th Name
                             th Remove?
                     tbody
-                        tr
+                        tr(ng-repeat='(id, row) in networks')
                             td
-                                i.fa.fa-facebook
-                            td Facebook
-                            td Bob Dobbs
+                                i(ng-class="'fa fa-'+row.type")
+                            td {{ row.type }}
+                            td {{ row.name }}
                             td
                                 a(href='#')
                                     i.fa.fa-times.text-danger
