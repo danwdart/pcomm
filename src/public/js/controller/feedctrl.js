@@ -1,8 +1,6 @@
 export default ($scope, jQuery) => {
-    $scope.sample = 'sample';
-
     $scope.select = (id) => {
-        window.location.hash = '/message/' + id
+        window.location.hash = '/message/' + id;
     };
 
     $scope.tableRows = [
@@ -25,15 +23,4 @@ export default ($scope, jQuery) => {
             date: '2015-10-01 00:00:00'
         }
     ];
-
-    let sample = () => new Promise((resolve,reject) => 
-        setTimeout(() => resolve('hi'), 1000)
-    );
-
-    let go = async () => {
-        let that = await sample();
-        console.log(that);
-    };
-    
-    go();
 };

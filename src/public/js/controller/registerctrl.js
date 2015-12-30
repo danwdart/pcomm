@@ -1,4 +1,4 @@
-export default ($scope, $http, $location, jQuery) => {
+export default ($scope, register, $location, jQuery) => {
     $scope.username = null;
     $scope.password = null;
     $scope.password2 = null;
@@ -10,17 +10,15 @@ export default ($scope, $http, $location, jQuery) => {
         if ($scope.password !== $scope.password2)
             return $scope.showPasswordMatchError = true;
 
-        try {
-            let response = await $http.post(
-                '/register',
-                {
-                    username: $scope.username,
-                    password: $scope.password
-                }
-            );
-            headerctrl.flashsuccess = 'Successful Registration.'
+        let result = register($scope.username, $scope.password);
+        
+        // this could probably be better
+        if (result.success) {
+            //headerctrl.flashsuccess = 'Successful Registration.'
             $location.path('/');
-        } catch (e) {
+        }
+        
+        if (result.error) {
             $scope.showError = true;
         }
     };

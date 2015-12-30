@@ -1,4 +1,4 @@
-import User from '../lib/Model/User';
+import User from '../lib/model/user';
 import passwordhash from 'password-hash';
 
 export async function LoginCtrl(req, res) {
