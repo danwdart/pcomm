@@ -5,6 +5,8 @@ import sessions from 'client-sessions';
 import bodyParser from 'body-parser';
 import socketio from 'socket.io';
 import XmppClient from 'node-xmpp-client';
+import passport from 'passport';
+import passportsetup from './lib/passport/setup';
 import config from '../config/app';
 import routes from './lib/routes';
 import ioroutes from './lib/ioroutes';
@@ -42,6 +44,8 @@ app.use(sessions({
     ephemeral: false
 }));
 
+passportsetup(app);
+  
 routes(app);
 
 ioroutes(io, XmppClient);
