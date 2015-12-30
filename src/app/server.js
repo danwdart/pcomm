@@ -16,9 +16,12 @@ import './lib/db';
 let app = express(),
     server = http.Server(app),
     io = socketio(server),
-    port = ('undefined' !== process.env['PORT'])?
+    port = ('undefined' === typeof process.env.PORT)?
         config.port:
-        process.env['PORT'];
+        process.env.PORT,
+    ip = ('undefined' === typeof process.env.IP)?
+        config.ip:
+        process.env.IP;
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,5 +45,6 @@ bgroutes();
 
 server.listen(
     port,
-    () => console.log('Listening on port ' + port)
+    ip,
+    () => console.log('Listening on port', port, 'on IP', ip)
 );
