@@ -1,5 +1,5 @@
 import {requireLogin} from './filters';
-import {LoginCtrl, RegisterCtrl, LogoutCtrl, StatusCtrl} from '../controllers/AuthCtrl';
+import {LoginCtrl, RegisterCtrl, LogoutCtrl, StatusCtrl} from '../controller/authctrl';
 
 export default (app) => {
     app.post('/register', RegisterCtrl);

@@ -1,12 +1,17 @@
-import HeaderCtrl from '../controllers/HeaderCtrl';
-import IndexCtrl from '../controllers/IndexCtrl';
-import LoginCtrl from '../controllers/LoginCtrl';
-import RegisterCtrl from '../controllers/RegisterCtrl';
-import AccountsCtrl from '../controllers/AccountsCtrl';
-import NewMessageCtrl from '../controllers/NewMessageCtrl';
-import MessageCtrl from '../controllers/MessageCtrl';
-import SettingsCtrl from '../controllers/SettingsCtrl';
-import NotFoundCtrl from '../controllers/NotFoundCtrl';
+import HeaderCtrl from '../controllers/headerctrl';
+import IndexCtrl from '../controllers/indexctrl';
+import InboxCtrl from '../controllers/inboxctrl';
+import FeedCtrl from '../controllers/feedctrl';
+import LoginCtrl from '../controller/loginctrl';
+import RegisterCtrl from '../controller/registerctrl';
+import AccountsCtrl from '../controller/accountsctrl';
+import ComposeCtrl from '../controller/composectrl';
+import MessageCtrl from '../controller/messagectrl';
+import SettingsCtrl from '../controller/settingsctrl';
+import NotFoundCtrl from '../controller/notfoundctrl';
+
+import LoginService from '../service/loginservice';
+import RegisterService from '../service/registerservice';
 
 export default (ngApp, jQuery) => {
     ngApp.config(
@@ -36,6 +41,20 @@ export default (ngApp, jQuery) => {
                         controllerAs: 'registerctrl'
                     }
                 ).when(
+                    '/inbox',
+                    {
+                        templateUrl: 'views/inbox.html',
+                        controller: 'InboxCtrl',
+                        controllerAs: 'inboxctrl'
+                    }
+                ).when(
+                    '/feed',
+                    {
+                        templateUrl: 'views/feed.html',
+                        controller: 'FeedCtrl',
+                        controllerAs: 'feedctrl'
+                    }
+                ).when(
                     '/accounts',
                     {
                         templateUrl: 'views/accounts.html',
@@ -45,9 +64,9 @@ export default (ngApp, jQuery) => {
                 ).when(
                     '/new',
                     {
-                        templateUrl: 'views/newmessage.html',
-                        controller: 'NewMessageCtrl',
-                        controllerAs: 'newmessagectrl'
+                        templateUrl: 'views/compose.html',
+                        controller: 'ComposeCtrl',
+                        controllerAs: 'composectrl'
                     }
                 ).when(
                     '/message/:id',
@@ -88,12 +107,17 @@ export default (ngApp, jQuery) => {
     )
     .controller('HeaderCtrl', ['$scope', '$location', '$http', HeaderCtrl])
     .controller('IndexCtrl', ['$scope', 'jQuery', IndexCtrl])
-    .controller('LoginCtrl', ['$scope', '$http', '$location', 'jQuery', LoginCtrl])
-    .controller('RegisterCtrl', ['$scope', '$http', '$location', 'jQuery', RegisterCtrl])
+    .controller('InboxCtrl', ['$scope', 'jQuery', InboxCtrl])
+    .controller('FeedCtrl', ['$scope', 'jQuery', FeedCtrl])
+    .controller('LoginCtrl', ['$scope', 'login', '$location', 'jQuery', LoginCtrl])
+    .controller('RegisterCtrl', ['$scope', 'register', '$location', 'jQuery', RegisterCtrl])
     .controller('NotFoundCtrl', ['$scope', 'jQuery', NotFoundCtrl])
     .controller('AccountsCtrl', ['$scope', 'jQuery', AccountsCtrl])
-    .controller('NewMessageCtrl', ['$scope', 'jQuery', NewMessageCtrl])
+    .controller('ComposeCtrl', ['$scope', 'jQuery', ComposeCtrl])
     .controller('MessageCtrl', ['$scope', 'jQuery', MessageCtrl])
     .controller('SettingsCtrl', ['$scope', 'jQuery', SettingsCtrl])
-    .factory('jQuery', () => jQuery);
+    
+    .factory('jQuery', () => jQuery)
+    .factory('login', ['$http', LoginService])
+    .factory('register', ['$http', RegisterService]);
 };

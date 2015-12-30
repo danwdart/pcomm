@@ -1,4 +1,5 @@
 export default async ($scope, $location, $http) => {
+    $scope.flashsuccess = null;
     $scope.isActive = (viewLocation) => 
         viewLocation === $location.path();
 

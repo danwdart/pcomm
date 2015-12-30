@@ -11,4 +11,5 @@
             label.control-label Password (again)
             input(type='password',placeholder='Enter password again',ng-model='password2')
         .form-group
+            label.control-label.text-danger(ng-show='showError') Sorry, the user exists.
             button(class='btn btn-primary',ng-click='register()') Register

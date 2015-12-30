@@ -1,0 +1,12 @@
+table.messages.table.table-striped.table-hover
+  thead
+    tr
+      th From
+      th Subject
+      th Date
+  tbody
+    tr(ng-repeat='row in tableRows',ng-click='select(row.id)')
+      a(href='/#/message/{{row.id}}')
+      td {{row.from}}
+      td {{row.subject}}
+      td {{row.date}}
