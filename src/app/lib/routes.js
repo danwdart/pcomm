@@ -1,5 +1,4 @@
 import {requireLogin} from './filters';
-import IndexCtrl from '../controllers/IndexCtrl';
 import {LoginCtrl, RegisterCtrl, LogoutCtrl, StatusCtrl} from '../controllers/AuthCtrl';
 
 export default (app) => {

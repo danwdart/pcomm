@@ -5,7 +5,7 @@ import sessions from 'client-sessions';
 import bodyParser from 'body-parser';
 import socketio from 'socket.io';
 import XmppClient from 'node-xmpp-client';
-import config from '../config/app.json';
+import config from '../config/app';
 import routes from './lib/routes';
 import ioroutes from './lib/ioroutes';
 import bgroutes from './lib/bgroutes';
@@ -25,6 +25,11 @@ let app = express(),
 
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+/* just in case
+app.set('views', __dirname + '/../src/public');
+app.set('view engine', 'jade');
+*/
 
 app.use(express.static(__dirname + '/../public'));
 
