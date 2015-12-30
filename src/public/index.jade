@@ -26,12 +26,12 @@ html(manifest='appcache.manifest',ng-app='pcomm')
             li(ng-show='isLoggedIn')
               a(href="#/",ng-click="logout()") Logout
         input.form-control#search(type='search',placeholder='Search...')
-        .alert.alert-success(ng-show="null !== flashsuccess",role='alert') {{ flashsuccess }}
+        .alert.alert-success(ng-hide,ng-show="null !== flashsuccess",role='alert') {{ flashsuccess }}
       main.row
         ng-view.col-lg-12
       footer.row
         small Copyright &copy; 2015 pComm
     script(src='/js/external.js')
-    script(src='/socket.io/socket.io.js')
     script(src='/js/index.js')
     script(src='//localhost:35729/livereload.js')
+    

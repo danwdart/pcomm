@@ -1,6 +1,8 @@
 export default async ($scope, $http, jQuery) => {
     $scope.username = null;
     $scope.password = null;
+    $scope.showInvalid = false;
+    $scope.showError = false;
     $scope.login = async () => {
         try {
             let response = await $http.post('/login', {
