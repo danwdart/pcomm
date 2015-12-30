@@ -5,7 +5,8 @@ let Schema = mongoose.Schema,
 
     schema = new Schema({
         username: String,
-        password: String
+        password: String,
+        networks: Object
     });
 
 export default mongoose.model('User', schema);

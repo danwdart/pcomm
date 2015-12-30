@@ -8,8 +8,8 @@ export default class Facebook {
     setup(req, res, next) {
         passport.use(new FacebookStrategy(
             config.oauth.facebook,
-            (accessToken, refreshToken, profile, done) => {
-                let user = new User(req.session.user);
+            async (accessToken, refreshToken, profile, done) => {
+                let user = await User.findById(req.session.user._id);
                 user.networks = user.networks || {};
                 user.networks[profile.id] = {
                     type: 'facebook',
@@ -17,7 +17,11 @@ export default class Facebook {
                     accessToken,
                     refreshToken
                 };
-                user.save();
+                try {
+                    await user.save();
+                } catch (err) {
+                    console.log(err);
+                }
                 req.session.user = user;
                 done(null, {});
             }

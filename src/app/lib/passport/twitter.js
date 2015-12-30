@@ -8,8 +8,8 @@ export default class Twitter {
     setup(req, res, next) {
         passport.use(new TwitterStrategy(
             config.oauth.twitter,
-            (accessToken, refreshToken, profile, done) => {
-                let user = new User(req.session.user);
+            async (accessToken, refreshToken, profile, done) => {
+                let user = await User.findById(req.session.user._id);
                 user.networks = req.session.user.networks || {};
                 user.networks[profile.id] = {
                     type: 'twitter',
@@ -17,7 +17,11 @@ export default class Twitter {
                     accessToken,
                     refreshToken
                 };
-                user.save();
+                try {
+                    await user.save();
+                } catch (err) {
+                    console.log(err);
+                }
                 req.session.user = user;
                 done(null, {});
             }
