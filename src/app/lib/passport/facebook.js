@@ -36,10 +36,12 @@ export default class Facebook {
             this.setup,
             passport.authenticate(
                 'facebook',
-                [
-                    'read_stream',
-                    'publish_actions'
-                ]
+                {
+                    scope: [
+                        'publish_actions',
+                        'user_posts'
+                    ]
+                }
             )
         );
         
