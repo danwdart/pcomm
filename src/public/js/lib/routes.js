@@ -10,9 +10,15 @@ import MessageCtrl from '../controller/messagectrl';
 import SettingsCtrl from '../controller/settingsctrl';
 import NotFoundCtrl from '../controller/notfoundctrl';
 
-import LoginService from '../service/loginservice';
-import RegisterService from '../service/registerservice';
-import SettingsService from '../service/settingsservice';
+import {
+    LoginFactory,
+    RegisterFactory,
+    isLoggedInFactory,
+    LogoutFactory
+} from '../factory/authfactory';
+
+import SettingsFactory from '../factory/settingsfactory';
+import FeedFactory from '../factory/feedfactory';
 
 export default (ngApp, jQuery) => {
     ngApp.config(
@@ -106,20 +112,23 @@ export default (ngApp, jQuery) => {
             }
         ]
     )
-    .controller('HeaderCtrl', ['$scope', '$location', '$http', HeaderCtrl])
-    .controller('IndexCtrl', ['$scope', 'jQuery', IndexCtrl])
-    .controller('InboxCtrl', ['$scope', 'jQuery', InboxCtrl])
-    .controller('FeedCtrl', ['$scope', 'jQuery', FeedCtrl])
-    .controller('LoginCtrl', ['$scope', 'login', '$location', 'jQuery', LoginCtrl])
-    .controller('RegisterCtrl', ['$scope', 'register', '$location', 'jQuery', RegisterCtrl])
-    .controller('NotFoundCtrl', ['$scope', 'jQuery', NotFoundCtrl])
-    .controller('AccountsCtrl', ['$scope', 'jQuery', AccountsCtrl])
-    .controller('ComposeCtrl', ['$scope', 'jQuery', ComposeCtrl])
-    .controller('MessageCtrl', ['$scope', 'jQuery', MessageCtrl])
-    .controller('SettingsCtrl', ['$scope', 'settings', 'jQuery', SettingsCtrl])
+    .controller('HeaderCtrl', ['$scope', 'isloggedin', 'logout', '$location', HeaderCtrl])
+    .controller('IndexCtrl', ['$scope', IndexCtrl])
+    .controller('InboxCtrl', ['$scope', InboxCtrl])
+    .controller('FeedCtrl', ['$scope', 'feed', FeedCtrl])
+    .controller('LoginCtrl', ['$scope', 'login', '$location', LoginCtrl])
+    .controller('RegisterCtrl', ['$scope', 'register', '$location', RegisterCtrl])
+    .controller('NotFoundCtrl', ['$scope', NotFoundCtrl])
+    .controller('AccountsCtrl', ['$scope', AccountsCtrl])
+    .controller('ComposeCtrl', ['$scope', ComposeCtrl])
+    .controller('MessageCtrl', ['$scope', MessageCtrl])
+    .controller('SettingsCtrl', ['$scope', 'settings', SettingsCtrl])
     
     .factory('jQuery', () => jQuery)
-    .factory('login', ['$http', LoginService])
-    .factory('register', ['$http', RegisterService])
-    .factory('settings', ['$http', SettingsService]);
+    .factory('login', ['$http', LoginFactory])
+    .factory('register', ['$http', RegisterFactory])
+    .factory('isloggedin', ['$http', isLoggedInFactory])
+    .factory('logout', ['$http', LogoutFactory])
+    .factory('settings', ['$http', SettingsFactory])
+    .factory('feed', ['$http', FeedFactory]);
 };

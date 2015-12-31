@@ -21,8 +21,13 @@ export default class Facebook {
     }
     
     async getFeed() {
-        let response = await FB.papi('/me/home');
-        console.log(response);
-        return response.data;
+        let response = await FB.papi('/me/feed');
+        
+        return response.data.map((item) => ({
+            from: 'Facebook',
+            subject: item.message,
+            date: item.created_time,
+            id: item.id
+        }));
     }
 }
