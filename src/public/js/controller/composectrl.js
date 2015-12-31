@@ -1,2 +1,2 @@
-export default ($scope, jQuery) => {
+export default ($scope) => {
 }
