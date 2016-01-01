@@ -11,6 +11,11 @@
             "consumerKey": "jSI8zfsneEXrbzYtUXg5p32Cj",
             "consumerSecret": "xrsHEkgSu9AqFlVloJWLhVMLv0I8GjlvWPhpWaP6nFqd1ve2rn",
             "callbackURL": "https://pcomm-dandart.c9users.io/auth/twitter/callback"
+        },
+        "steam": {
+            "returnURL": "https://pcomm-dandart.c9users.io/auth/steam/callback",
+            "realm": "https://pcomm-dandart.c9users.io",
+            "apiKey": "C421595CF56BA97C217ACC2088071027"
         }
     }
 }

@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
 let Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId,
+    Mixed = Schema.Types.Mixed,
 
     schema = new Schema({
         username: String,
         password: String,
-        networks: Object
+        networks: Mixed
     });
 
 export default mongoose.model('User', schema);

@@ -5,6 +5,8 @@ import FeedCtrl from '../controller/feedctrl';
 
 import Facebook from './passport/facebook';
 import Twitter from './passport/twitter';
+import GNUSocial from './passport/gnusocial';
+import Steam from './passport/steam';
 
 export default (app) => {
     app.post('/register', RegisterCtrl);
@@ -19,4 +21,10 @@ export default (app) => {
     
     let twitter = new Twitter();
     twitter.addRoutesTo(app);
+    
+    let gnusocial = new GNUSocial();
+    gnusocial.addRoutesTo(app);
+    
+    let steam = new Steam();
+    steam.addRoutesTo(app);
 };
