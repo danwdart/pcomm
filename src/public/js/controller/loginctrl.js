@@ -3,18 +3,22 @@ export default ($scope, login, $location, jQuery) => {
     $scope.password = null;
     $scope.showInvalid = false;
     $scope.showError = false;
-    
+
     $scope.login = async () => {
-        let result = login($scope.username, $scope.password);
-        
+        let result = await login($scope.username, $scope.password);
         // This could probably be less ugly
+        $scope.$root.isLoggedIn = result.isLoggedIn;
+        $scope.$root.$apply();
+
         if (result.isLoggedIn)
-            $location.path('/inbox');
-        
+            $location.url('/inbox');
+
         if (result.error)
             $scope.showError = true;
-        
+
         if (result.invalid)
             $scope.showInvalid = true;
+
+        $scope.$apply();
     };
 };
