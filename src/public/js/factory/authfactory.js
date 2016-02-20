@@ -8,7 +8,7 @@ export function LoginFactory($http) {
                     password
                 }
             );
-            
+
             if (204 == response.status) {
                 return {isLoggedIn: true}
             }
@@ -31,7 +31,7 @@ export function RegisterFactory($http) {
                     password
                 }
             );
-            
+
             return {success: true};
         } catch (err) {
             return {error: true};
