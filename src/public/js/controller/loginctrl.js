@@ -7,7 +7,6 @@ export default ($scope, auth, $location, jQuery) => {
     $scope.login = async () => {
         let result = await login($scope.username, $scope.password);
         
-        // This could probably be less ugly
         $scope.$root.isLoggedIn = result.isLoggedIn;
         $scope.$root.$apply();
 

@@ -3,16 +3,6 @@ export default async ($scope, isLoggedIn, logout, $location) => {
     $scope.$root.isLoggedIn = false;
     $scope.isActive = (viewLocation) =>
         viewLocation === $location.path();
-        
-    isLoggedIn.onLogin(() => {
-        $scope.isLoggedIn = true;
-        $scope.$apply();
-    });
-    
-    isLoggedIn.onLogout(() => {
-        $scope.isLoggedIn = false;
-        $scope.$apply();
-    });
 
     $scope.logout = async () => {
         await logout();
