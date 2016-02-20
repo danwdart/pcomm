@@ -17,18 +17,9 @@ module.exports = function(grunt) {
         //    all: ['src/js/**/*.js']
         //},
         //mocha: {
-        //    
+        //
         //}
         babel: {
-            options: {
-                presets: [
-                    'es2015',
-                    'stage-0'
-                ],
-                plugins: [
-                    'syntax-async-functions'
-                ]
-            },
             app: {
                 files: [
                     {
@@ -55,6 +46,7 @@ module.exports = function(grunt) {
                             'bower_components/bootstrap/dist/js/bootstrap.js',
                             'bower_components/sweetalert/dist/sweetalert-dev.js',
                             'bower_components/swal-forms/swal-forms.js'
+                            'bower_components/bootstrap/dist/js/bootstrap.js'
                         ],
                         dest: 'public/src/external/'
                     },
@@ -98,16 +90,7 @@ module.exports = function(grunt) {
                 },
                 transform: [
                     [
-                        'babelify',
-                        {
-                            presets: [
-                                'es2015',
-                                'stage-0'
-                            ],
-                            plugins: [
-                                'syntax-async-functions'
-                            ]
-                        }
+                        'babelify'
                     ]
                 ]/*
                 plugin: [
@@ -240,7 +223,7 @@ module.exports = function(grunt) {
                     errFile: 'pcomm.err',
                     outFile: 'pcomm.out',
                     logFile: 'forever.out',
-                    
+
                 }
             }
         },
