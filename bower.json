@@ -22,6 +22,7 @@
     "angular": "~1.4.4",
     "angular-route": "~1.4.4",
     "bootstrap": "~3.3.5",
-    "font-awesome": "fontawesome#~4.5.0"
+    "font-awesome": "fontawesome#~4.5.0",
+    "swal-forms": "chrism-dp/swal-forms"
   }
 }

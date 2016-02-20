@@ -3,7 +3,7 @@ export default async ($scope, feed) => {
         window.location.hash = '/message/' + id;
     };
 
-    let result = await feed();
+    let result = await feed.getFeed();
 
     $scope.tableRows = result;
     $scope.$apply();
