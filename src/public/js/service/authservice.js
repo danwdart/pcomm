@@ -1,5 +1,20 @@
-export function LoginFactory($http) {
-    return async (username, password) => {
+import EventEmitter from 'events';
+
+export default ($http) => 
+// todo decorate
+class Auth extends EventEmitter {
+    
+    constructor() {
+        this.isLoggedIn = false;
+        
+        this.on('login', () => {
+        });
+        
+        this.on('logout', () => {
+        })
+    }
+    
+    async login(username, password) {
         try {
             let response = await $http.post(
                 '/login',
@@ -10,6 +25,7 @@ export function LoginFactory($http) {
             );
             
             if (204 == response.status) {
+                this.processOnLogins();
                 return {isLoggedIn: true}
             }
         } catch (err) {
@@ -18,11 +34,9 @@ export function LoginFactory($http) {
             else
                 return {error: true}
         }
-    };
-};
-
-export function RegisterFactory($http) {
-    return async (username, password) => {
+    }
+    
+    async register(username, password) => {
         try {
             let response = await $http.post(
                 '/register',
@@ -36,22 +50,18 @@ export function RegisterFactory($http) {
         } catch (err) {
             return {error: true};
         }
-    };
-};
-
-export function isLoggedInFactory($http) {
-    return async () => {
+    }
+    
+    async isLoggedIn() {
         let status = await $http.get('/status');
         return status.data;
-    };
-}
-
-export function LogoutFactory($http) {
-    return async () => {
+    }
+    
+    async logout() {
         try {
             await $http.get('/logout');
         } catch (err) {
             console.log(err);
         }
-    };
+    }
 }

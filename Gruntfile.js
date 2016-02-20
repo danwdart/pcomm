@@ -48,10 +48,13 @@ module.exports = function(grunt) {
                         flatten: true,
                         expand: true,
                         src: [
+                            // we got to use these properly later
                             'bower_components/angular/angular.js',
                             'bower_components/angular-route/angular-route.js',
                             'bower_components/jquery/dist/jquery.js',
-                            'bower_components/bootstrap/dist/js/bootstrap.js'            
+                            'bower_components/bootstrap/dist/js/bootstrap.js',
+                            'bower_components/sweetalert/dist/sweetalert-dev.js',
+                            'bower_components/swal-forms/swal-forms.js'
                         ],
                         dest: 'public/src/external/'
                     },
@@ -147,7 +150,9 @@ module.exports = function(grunt) {
                         'public/src/external/jquery.js',
                         'public/src/external/bootstrap.js',
                         'public/src/external/angular.js',
-                        'public/src/external/angular-route.js'
+                        'public/src/external/angular-route.js',
+                        'public/src/external/sweetalert-dev.js',
+                        'public/src/external/swal-forms.js'
                     ]
                 }
             }
@@ -179,7 +184,10 @@ module.exports = function(grunt) {
                     'public/css/external.min.css': [
                         'bower_components/bootstrap/dist/css/bootstrap.min.css',
                         'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
-                        'bower_components/font-awesome/css/font-awesome.min.css'
+                        'bower_components/font-awesome/css/font-awesome.min.css',
+                        'bower_components/sweetalert/dist/sweetalert.css',
+                        'bower_components/sweetalert/themes/twitter/twitter.css',
+                        'bower_components/swal-forms/swal-forms.css'
                     ]
                 }
             }
@@ -218,9 +226,7 @@ module.exports = function(grunt) {
                         'public/css/index.css',
                         'public/js/**/*.js',
                         'public/img/**/*',
-                        'public/views/**/*.html',
-                        'bower_components/bootstrap/dist/css/bootstrap.min.css',
-                        'bower_components/bootstrap/dist/css/bootstrap-theme.min.css',
+                        'public/views/**/*.html'
                     ]
                 },
                 network: ['*']

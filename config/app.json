@@ -16,6 +16,9 @@
             "returnURL": "https://pcomm-dandart.c9users.io/auth/steam/callback",
             "realm": "https://pcomm-dandart.c9users.io",
             "apiKey": "C421595CF56BA97C217ACC2088071027"
+        },
+        "gnusocial": {
+            "callbackURL": "https://pcomm-dandart.c9users.io/auth/gnusocial/callback"
         }
     }
 }

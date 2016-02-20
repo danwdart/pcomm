@@ -8,10 +8,10 @@ export default class GNUSocial {
     setup(req, res, next) {
         passport.use(new GNUSocialStrategy(
             {
-                statusnet: req.post.instance,
-                consumerKey: req.post.consumerkey,
-                consumerSecret: req.post.consumersecret,
-                callbackURL: req.post.callbackurl
+                statusnet: req.query.instance,
+                consumerKey: req.query.consumerkey,
+                consumerSecret: req.query.consumersecret,
+                callbackURL: config.oauth.gnusocial.callbackURL
             },
             async (accessToken, refreshToken, profile, done) => {
                 let user = await User.findById(req.session.user._id);

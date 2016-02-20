@@ -1,11 +1,11 @@
-export default ($scope, login, $location, jQuery) => {
+export default ($scope, auth, $location, jQuery) => {
     $scope.username = null;
     $scope.password = null;
     $scope.showInvalid = false;
     $scope.showError = false;
     
     $scope.login = async () => {
-        let result = login($scope.username, $scope.password);
+        let result = auth.login($scope.username, $scope.password);
         
         // This could probably be less ugly
         if (result.isLoggedIn)
