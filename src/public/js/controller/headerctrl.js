@@ -1,6 +1,7 @@
 export default async ($scope, isLoggedIn, logout, $location) => {
     $scope.flashsuccess = null;
-    $scope.isActive = (viewLocation) => 
+    $scope.$root.isLoggedIn = false;
+    $scope.isActive = (viewLocation) =>
         viewLocation === $location.path();
         
     isLoggedIn.onLogin(() => {
@@ -15,11 +16,14 @@ export default async ($scope, isLoggedIn, logout, $location) => {
 
     $scope.logout = async () => {
         await logout();
-        $scope.isLoggedIn = false;
-        $location.hash('/';)
+        $scope.$root.isLoggedIn = false;
+        $scope.$root.$apply();
+        $location.hash('/');
     }
-    
+
     let status = await isLoggedIn();
-    $scope.isLoggedIn = status;
-    $scope.apply();
+    $scope.$root.isLoggedIn = status;
+
+    $scope.$apply();
+    $scope.$root.$apply();
 };

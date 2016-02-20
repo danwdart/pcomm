@@ -10,16 +10,18 @@ export default ($scope, register, $location, jQuery) => {
         if ($scope.password !== $scope.password2)
             return $scope.showPasswordMatchError = true;
 
-        let result = register($scope.username, $scope.password);
-        
+        let result = await register($scope.username, $scope.password);
+
         // this could probably be better
         if (result.success) {
             //headerctrl.flashsuccess = 'Successful Registration.'
             $location.path('/');
         }
-        
+
         if (result.error) {
             $scope.showError = true;
         }
+
+        $scope.$apply();
     };
 };
