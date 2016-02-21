@@ -10,3 +10,16 @@ table.messages {
 .sweet-alert {
     margin-top: -200px !important;
 }
+
+::-webkit-input-placeholder {
+    color: #333;
+}
+
+::-moz-placeholder {
+    opacity: 1;
+    color: #333;
+}
+
+:-ms-input-placeholder {
+    color: #333;
+}
