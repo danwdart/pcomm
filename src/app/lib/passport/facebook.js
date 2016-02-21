@@ -18,6 +18,7 @@ export default class Facebook {
                     refreshToken
                 };
                 try {
+                    user.markModified('networks');
                     await user.save();
                 } catch (err) {
                     console.log(err);
@@ -26,7 +27,7 @@ export default class Facebook {
                 done(null, {});
             }
         ));
-        
+
         next();
     }
 
@@ -44,7 +45,7 @@ export default class Facebook {
                 }
             )
         );
-        
+
         app.get('/auth/facebook/callback',
             requireLogin,
             this.setup,

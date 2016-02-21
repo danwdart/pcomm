@@ -4,7 +4,6 @@ import InboxCtrl from '../controller/inboxctrl';
 import FeedCtrl from '../controller/feedctrl';
 import LoginCtrl from '../controller/loginctrl';
 import RegisterCtrl from '../controller/registerctrl';
-import AccountsCtrl from '../controller/accountsctrl';
 import ComposeCtrl from '../controller/composectrl';
 import MessageCtrl from '../controller/messagectrl';
 import SettingsCtrl from '../controller/settingsctrl';
@@ -62,13 +61,6 @@ export default (ngApp, jQuery) => {
                         controllerAs: 'feedctrl'
                     }
                 ).when(
-                    '/accounts',
-                    {
-                        templateUrl: 'views/accounts.html',
-                        controller: 'AccountsCtrl',
-                        controllerAs: 'accountsctrl'
-                    }
-                ).when(
                     '/new',
                     {
                         templateUrl: 'views/compose.html',
@@ -81,13 +73,6 @@ export default (ngApp, jQuery) => {
                         templateUrl: 'views/message.html',
                         controller: 'MessageCtrl',
                         controllerAs: 'messagectrl'
-                    }
-                ).when(
-                    '/accounts',
-                    {
-                        templateUrl: 'views/accounts.html',
-                        controller: 'AccountsCtrl',
-                        controllerAs: 'accountsctrl'
                     }
                 ).when(
                     '/settings',
@@ -119,11 +104,10 @@ export default (ngApp, jQuery) => {
     .controller('LoginCtrl', ['$scope', 'login', '$location', LoginCtrl])
     .controller('RegisterCtrl', ['$scope', 'register', '$location', RegisterCtrl])
     .controller('NotFoundCtrl', ['$scope', NotFoundCtrl])
-    .controller('AccountsCtrl', ['$scope', AccountsCtrl])
     .controller('ComposeCtrl', ['$scope', ComposeCtrl])
     .controller('MessageCtrl', ['$scope', MessageCtrl])
     .controller('SettingsCtrl', ['$scope', 'settings', SettingsCtrl])
-    
+
     .factory('jQuery', () => jQuery)
     .factory('login', ['$http', LoginFactory])
     .factory('register', ['$http', RegisterFactory])

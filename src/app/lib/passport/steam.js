@@ -17,7 +17,7 @@ export default class Steam {
                     identifier
                 };
                 try {
-                    // This doesn't work!
+                    user.markModified('networks');
                     await user.save();
                 } catch (err) {
                     console.log(err);
@@ -26,7 +26,7 @@ export default class Steam {
                 done(null, {});
             }
         ));
-        
+
         next();
     }
 
@@ -38,7 +38,7 @@ export default class Steam {
                 'steam'
             )
         );
-        
+
         app.get('/auth/steam/callback',
             requireLogin,
             this.setup,

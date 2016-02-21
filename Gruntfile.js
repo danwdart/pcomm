@@ -45,7 +45,7 @@ module.exports = function(grunt) {
                             'bower_components/jquery/dist/jquery.js',
                             'bower_components/bootstrap/dist/js/bootstrap.js',
                             'bower_components/sweetalert/dist/sweetalert-dev.js',
-                            'bower_components/swal-forms/swal-forms.js'
+                            'bower_components/swal-forms/swal-forms.js',
                             'bower_components/bootstrap/dist/js/bootstrap.js'
                         ],
                         dest: 'public/src/external/'
