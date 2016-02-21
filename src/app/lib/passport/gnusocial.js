@@ -23,6 +23,7 @@ export default class GNUSocial {
                     refreshToken
                 };
                 try {
+                    user.markModified('networks');
                     await user.save();
                 } catch (err) {
                     console.log(err);
@@ -31,7 +32,7 @@ export default class GNUSocial {
                 done(null, {});
             }
         ));
-        
+
         next();
     }
 
@@ -45,7 +46,7 @@ export default class GNUSocial {
                 )
             }
         );
-        
+
         app.get('/auth/gnusocial/callback',
             requireLogin,
             this.setup,

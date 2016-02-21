@@ -7,5 +7,21 @@ export default ($http) => ({
             console.log(err);
             return {};
         }
+    },
+    async addEmailAccount(data) {
+        try {
+            let result = await $http.post('/settings/email', data);
+            return result.data.networks;
+        } catch (err) {
+            console.log(err);
+        }
+    },
+    async deleteNetwork(id) {
+        try {
+            let result = await $http.delete('/settings/network/'+id);
+            return result.data.networks;
+        } catch (err) {
+            console.log(err);
+        }
     }
 });

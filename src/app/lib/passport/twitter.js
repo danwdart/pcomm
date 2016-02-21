@@ -18,6 +18,7 @@ export default class Twitter {
                     refreshToken
                 };
                 try {
+                    user.markModified('networks');
                     await user.save();
                 } catch (err) {
                     console.log(err);
@@ -26,7 +27,7 @@ export default class Twitter {
                 done(null, {});
             }
         ));
-        
+
         next();
     }
 
@@ -38,7 +39,7 @@ export default class Twitter {
                 'twitter'
             )
         );
-        
+
         app.get('/auth/twitter/callback',
             requireLogin,
             this.setup,

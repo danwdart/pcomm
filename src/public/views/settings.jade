@@ -100,7 +100,7 @@
                                 i.fa.fa-stack-exchange
                             p Stack Exchange
                     .col-lg-1.text-center
-                        a(href='#')
+                        a(href='',ng-click="setupEmail()")
                             h1
                                 i.fa.fa-envelope
                             p Email
@@ -131,7 +131,7 @@
                             td {{ row.type }}
                             td {{ row.name }}
                             td
-                                a(href='#')
+                                a(href='',ng-click="delete(id)")
                                     i.fa.fa-times.text-danger
         .row
             h4 Change your account details

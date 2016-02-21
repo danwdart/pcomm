@@ -1,6 +1,14 @@
 import {requireLogin} from './filters';
-import {LoginCtrl, RegisterCtrl, LogoutCtrl, StatusCtrl} from '../controller/authctrl';
-import SettingsCtrl from '../controller/settingsctrl';
+import {
+    LoginCtrl,
+    RegisterCtrl,
+    LogoutCtrl,
+    StatusCtrl
+} from '../controller/authctrl';
+import SettingsCtrl, {
+    email as SettingsEmailCtrl,
+    deleteNetwork as SettingsDeleteNetworkCtrl
+} from '../controller/settingsctrl';
 import FeedCtrl from '../controller/feedctrl';
 
 import Facebook from './passport/facebook';
@@ -14,17 +22,19 @@ export default (app) => {
     app.get('/logout', LogoutCtrl);
     app.get('/status', StatusCtrl);
     app.get('/settings', requireLogin, SettingsCtrl);
+    app.post('/settings/email', requireLogin, SettingsEmailCtrl);
+    app.delete('/settings/network/:id', requireLogin, SettingsDeleteNetworkCtrl);
     app.get('/feed', requireLogin, FeedCtrl);
-    
+
     let facebook = new Facebook();
     facebook.addRoutesTo(app);
-    
+
     let twitter = new Twitter();
     twitter.addRoutesTo(app);
-    
+
     let gnusocial = new GNUSocial();
     gnusocial.addRoutesTo(app);
-    
+
     let steam = new Steam();
     steam.addRoutesTo(app);
 };
