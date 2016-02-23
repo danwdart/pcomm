@@ -7,7 +7,8 @@ export default async (req, res) => {
         objFeed,
         networks = req.session.user.networks,
         objNetwork;
-    for (let network of networks) {
+    for (let id in networks) {
+        let network = networks[id];
         switch(network.type) {
             case 'facebook':
                 objNetwork = new FacebookNetwork(
