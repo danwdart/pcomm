@@ -7,8 +7,7 @@ export default async (req, res) => {
         objFeed,
         networks = req.session.user.networks,
         objNetwork;
-    for (let id in networks) {
-        let network = networks[id];
+    for (let network of networks) {
         switch(network.type) {
             case 'facebook':
                 objNetwork = new FacebookNetwork(
@@ -45,6 +44,6 @@ export default async (req, res) => {
                 break;
         }
     }
-    
+
     return res.send(arrFeed);
 }

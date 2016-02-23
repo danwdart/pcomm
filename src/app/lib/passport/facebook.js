@@ -3,6 +3,7 @@ import passport from 'passport';
 import {Strategy as FacebookStrategy} from 'passport-facebook';
 import User from '../model/user';
 import {requireLogin} from '../filters';
+import md5 from '../md5';
 
 export default class Facebook {
     setup(req, res, next) {
@@ -11,7 +12,7 @@ export default class Facebook {
             async (accessToken, refreshToken, profile, done) => {
                 let user = await User.findById(req.session.user._id);
                 user.networks = user.networks || {};
-                user.networks[profile.id] = {
+                user.networks[md5('facebook'+profile.id)] = {
                     type: 'facebook',
                     name: profile.displayName,
                     accessToken,

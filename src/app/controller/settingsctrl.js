@@ -1,4 +1,5 @@
 import User from '../lib/model/user';
+import md5 from '../lib/md5';
 
 export default async (req, res) => {
     let user = await User.findById(req.session.user._id);
@@ -13,7 +14,7 @@ export async function email(req, res) {
     if ('undefined' == typeof user.networks)
         user.networks = {};
 
-    user.networks[post.emailaddress] = {
+    user.networks[md5('email'+post.emailaddress)] = {
         type: 'email',
         name: post.emailaddress,
         password: post.password,

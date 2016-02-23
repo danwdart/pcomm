@@ -1,4 +1,4 @@
-export default ($scope, auth, $location, jQuery) => {
+export default ($scope, login, $location, jQuery) => {
     $scope.username = null;
     $scope.password = null;
     $scope.showInvalid = false;
@@ -6,7 +6,7 @@ export default ($scope, auth, $location, jQuery) => {
 
     $scope.login = async () => {
         let result = await login($scope.username, $scope.password);
-        
+
         $scope.$root.isLoggedIn = result.isLoggedIn;
         $scope.$root.$apply();
 
