@@ -3,6 +3,7 @@ import passport from 'passport';
 import {Strategy as SteamStrategy} from 'passport-steam';
 import User from '../model/user';
 import {requireLogin} from '../filters';
+import md5 from '../md5';
 
 export default class Steam {
     setup(req, res, next) {
@@ -11,7 +12,7 @@ export default class Steam {
             async (identifier, profile, done) => {
                 let user = await User.findById(req.session.user._id);
                 user.networks = user.networks || {};
-                user.networks[profile.id] = {
+                user.networks[md5('steam'+profile.id)] = {
                     type: 'steam',
                     name: profile.displayName,
                     identifier

@@ -3,6 +3,7 @@ import passport from 'passport';
 import {Strategy as TwitterStrategy} from 'passport-twitter';
 import User from '../model/user';
 import {requireLogin} from '../filters';
+import md5 from '../md5';
 
 export default class Twitter {
     setup(req, res, next) {
@@ -11,7 +12,7 @@ export default class Twitter {
             async (accessToken, refreshToken, profile, done) => {
                 let user = await User.findById(req.session.user._id);
                 user.networks = req.session.user.networks || {};
-                user.networks[profile.id] = {
+                user.networks[md5('twitter'+profile.id)] = {
                     type: 'twitter',
                     name: profile.displayName,
                     accessToken,
