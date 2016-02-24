@@ -10,18 +10,18 @@ export default class Twitter {
             access_token_key: accesstoken,
             access_token_secret: refreshtoken
         });
-        
+
         this._client.pget = promisify(this._client.get, function(err, result, response) {
             if (err)
                 return this.reject(err);
             return this.resolve(result[0]);
         });
     }
-    
+
     getInbox() {
-        
+        return [];
     }
-    
+
     async getFeed() {
         try {
             let result = await this._client.pget('statuses/home_timeline');

@@ -15,14 +15,14 @@ export default class Facebook {
             return this.resolve(result)
         });
     }
-    
+
     getInbox() {
-        
+        return [];
     }
-    
+
     async getFeed() {
         let response = await FB.papi('/me/feed');
-        
+
         return response.data.map((item) => ({
             from: 'Facebook',
             subject: item.message,

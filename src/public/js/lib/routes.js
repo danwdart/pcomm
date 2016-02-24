@@ -18,6 +18,7 @@ import {
 
 import SettingsFactory from '../factory/settingsfactory';
 import FeedFactory from '../factory/feedfactory';
+import InboxFactory from '../factory/inboxfactory';
 
 export default (ngApp, jQuery) => {
     ngApp.config(
@@ -99,7 +100,7 @@ export default (ngApp, jQuery) => {
     )
     .controller('HeaderCtrl', ['$scope', 'isloggedin', 'logout', '$location', HeaderCtrl])
     .controller('IndexCtrl', ['$scope', IndexCtrl])
-    .controller('InboxCtrl', ['$scope', InboxCtrl])
+    .controller('InboxCtrl', ['$scope', 'inbox', InboxCtrl])
     .controller('FeedCtrl', ['$scope', 'feed', FeedCtrl])
     .controller('LoginCtrl', ['$scope', 'login', '$location', LoginCtrl])
     .controller('RegisterCtrl', ['$scope', 'register', '$location', RegisterCtrl])
@@ -114,5 +115,6 @@ export default (ngApp, jQuery) => {
     .factory('isloggedin', ['$http', isLoggedInFactory])
     .factory('logout', ['$http', LogoutFactory])
     .factory('settings', ['$http', SettingsFactory])
-    .factory('feed', ['$http', FeedFactory]);
+    .factory('feed', ['$http', FeedFactory])
+    .factory('inbox', ['$http', InboxFactory]);
 };
