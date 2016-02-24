@@ -25,7 +25,7 @@ let app = express(),
         config.ip:
         process.env.IP;
 
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /* just in case
@@ -45,7 +45,7 @@ app.use(sessions({
 }));
 
 passportsetup(app);
-  
+
 routes(app);
 
 ioroutes(io, XmppClient);
