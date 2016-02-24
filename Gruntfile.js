@@ -3,19 +3,20 @@ module.exports = function(grunt) {
         clean: {
             public: {
                 src: [
-                    'compiled/**/*',
-                    'public/**/*',
+                    './compiled/**/*',
+                    './public/**/*',
                 ]
             },
             server: {
                 src: [
-                    'app/**/*'
+                    './app/**/*'
                 ]
             }
         },
-        //eslint: {
-        //    all: ['src/js/**/*.js']
-        //},
+        eslint: {
+            app: ['src/app/**/*.js'],
+            public: ['src/public/js/**/*.js']
+        },
         //mocha: {
         //
         //}
@@ -253,6 +254,7 @@ module.exports = function(grunt) {
                 },
                 files: ['src/app/**/*.js'],
                 tasks: [
+                    'eslint:app',
                     'clean:server',
                     'babel',
                     'forever:server:stop',
@@ -266,7 +268,7 @@ module.exports = function(grunt) {
                 },
                 files: ['src/public/js/**/*.js'],
                 tasks: [
-                    /*'eslint',*/
+                    'eslint:public',
                     'copy:js',
                     'browserify:app',
                     'exorcise:app',
@@ -287,7 +289,12 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: 'src/public/css/**',
-                tasks: ['copy:css', 'sass', 'cssmin:app', 'appcache']
+                tasks: [
+                    'copy:css',
+                    'sass',
+                    'cssmin:app',
+                    'appcache'
+                ]
             },
             cssexternal: {
                 options: {
@@ -295,15 +302,25 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: 'bower_components/**/*.css',
-                tasks: ['cssmin:external', 'appcache']
+                tasks: [
+                    'cssmin:external',
+                    'appcache'
+                ]
             },
             views: {
                 options: {
                     spawn: true,
                     livereload: true
                 },
-                files: ['config/locals.json', 'src/public/index.jade', 'src/public/views/**'],
-                tasks: ['jade', 'appcache']
+                files: [
+                    'config/locals.json',
+                    'src/public/index.jade',
+                    'src/public/views/**'
+                ],
+                tasks: [
+                    'jade',
+                    'appcache'
+                ]
             },
         }
     });
@@ -314,8 +331,8 @@ module.exports = function(grunt) {
         'default', [
             'clean',
             'copy',
+            'eslint',
             'babel',
-            /*'eslint',*/
             'browserify',
             'exorcise',
             'concat',
@@ -330,8 +347,8 @@ module.exports = function(grunt) {
         'app', [
             'clean',
             'copy',
+            'eslint',
             'babel',
-            /*'eslint',*/
             'browserify:app',
             'exorcise:app',
             'sass',
