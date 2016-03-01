@@ -12,38 +12,7 @@ html(manifest='appcache.manifest',ng-app='pcomm')
   body
     .container-fluid
       header.row(ng-controller='HeaderCtrl')
-        nav.col-lg-12
-          ul.nav.nav-pills
-            li(ng-show="$root.isLoggedIn",ng-class="{active: isActive('/inbox')}")
-              a(href='#/inbox')
-                i.fa.fa-envelope(title="Inbox")
-                span.hidden-sm &nbsp; Inbox
-            li(ng-show="$root.isLoggedIn",ng-class="{active: isActive('/feed')}")
-              a(href='#/feed')
-                i.fa.fa-rss(title="Feed")
-                span.hidden-sm &nbsp; Feed
-            li(ng-show="$root.isLoggedIn",ng-class="{active: isActive('/new')}")
-              a(href='#/new')
-                i.fa.fa-pencil(title="Compose")
-                span.hidden-sm &nbsp; Compose
-            li(ng-show="$root.isLoggedIn",ng-class="{active: isActive('/settings')}")
-              a(href='#/settings')
-                i.fa.fa-cog(title="Settings")
-                span.hidden-sm &nbsp; Settings
-            li(ng-class="{active: isActive('/login')}",ng-show='!$root.isLoggedIn')
-              a(href='#/login')
-                i.fa.fa-sign-in(title="Login")
-                span.hidden-sm &nbsp; Login
-            li(ng-class="{active: isActive('/register')}",ng-show='!$root.isLoggedIn')
-              a(href='#/register')
-                i.fa.fa-user-plus(title="Register")
-                span.hidden-sm &nbsp; Register
-            li(ng-show='$root.isLoggedIn')
-              a(href="#/",ng-click="logout()")
-                i.fa.fa-sign-out(title="Logout")
-                span.hidden-sm &nbsp; Logout
-        input.form-control#search(type='search',placeholder='Search...')
-        .alert.alert-success(ng-cloak,ng-show="null !== flashsuccess",role='alert') {{ flashsuccess }}
+        include ./header
       main.row
         ng-view.col-lg-12
       footer.row.text-center
