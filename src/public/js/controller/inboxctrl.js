@@ -1,22 +1,23 @@
 export default async ($scope, inbox, $location) => {
     $scope.select = (id) => {
-        $location.path('/message/' + id);
+        $('#message'+id).show();
     };
 
     $scope.compose = () => {
-        $('.compose').removeClass('hidden').show(1000);
+        $('.compose').show(1000);
     }
 
     $scope.closeCompose = () => {
-        $('.compose').hide(1000).addClass('hidden');
+        $('.compose').hide(1000);
     }
 
     if ('compose' == $location.hash()) {
         $scope.compose();
     }
 
-    let result = await inbox.getInbox();
+    $scope.tableRows = await inbox.getInbox();
+    $scope.$apply();
 
-    $scope.tableRows = result;
+    $scope.folders = await inbox.getFolders();
     $scope.$apply();
 };

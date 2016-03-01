@@ -20,6 +20,15 @@ export default class Twitter {
         });
     }
 
+    async getFolders() {
+        return [
+            {
+                name: 'Twitter',
+                type: 'twitter'
+            }
+        ];
+    }
+
     getInbox() {
         return [];
     }

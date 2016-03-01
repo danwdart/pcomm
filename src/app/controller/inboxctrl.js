@@ -62,3 +62,62 @@ export default async (req, res) => {
 
     return res.send(arrInbox);
 }
+
+export async function folders(req, res) {
+    let arrFolders = [],
+        objFolders,
+        networks = req.session.user.networks,
+        objNetwork;
+    for (let id in networks) {
+        let network = networks[id];
+        switch(network.type) {
+            case 'facebook':
+                objNetwork = new FacebookNetwork(
+                    network.accessToken,
+                    network.refreshToken
+                );
+                try {
+                    objFolders = await objNetwork.getFolders();
+                } catch (err) {
+                    console.log(err);
+                    break;
+                }
+                for (let item of objFolders) {
+                    arrFolders.push(item);
+                }
+                break;
+            case 'twitter':
+                objNetwork = new TwitterNetwork(
+                    network.accessToken,
+                    network.refreshToken
+                );
+                try {
+                    objFolders = await objNetwork.getFolders();
+                } catch (err) {
+                    console.log(err);
+                    break;
+                }
+                for (let item of objFolders) {
+                    arrFolders.push(item);
+                }
+                break;
+            case 'email':
+                    objNetwork = new EmailNetwork(network);
+                    try {
+                        objFolders = await objNetwork.getFolders();
+                    } catch (err) {
+                        console.log(err);
+                        break;
+                    }
+                    for (let item of objFolders) {
+                        arrFolders.push(item);
+                    }
+                    break;
+            default:
+                console.log('do not know what a', network.type, 'is, sorry')
+                break;
+        }
+    }
+
+    return res.send(arrFolders);
+}

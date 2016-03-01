@@ -10,7 +10,7 @@ import SettingsCtrl, {
     deleteNetwork as SettingsDeleteNetworkCtrl
 } from '../controller/settingsctrl';
 import FeedCtrl from '../controller/feedctrl';
-import InboxCtrl from '../controller/inboxctrl';
+import InboxCtrl, {folders as InboxFoldersCtrl} from '../controller/inboxctrl';
 
 import Facebook from './passport/facebook';
 import Twitter from './passport/twitter';
@@ -27,6 +27,7 @@ export default (app) => {
     app.delete('/settings/network/:id', requireLogin, SettingsDeleteNetworkCtrl);
     app.get('/feed', requireLogin, FeedCtrl);
     app.get('/inbox', requireLogin, InboxCtrl);
+    app.get('/inbox/folders', requireLogin, InboxFoldersCtrl);
 
     let facebook = new Facebook();
     facebook.addRoutesTo(app);
