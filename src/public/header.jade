@@ -8,8 +8,8 @@ nav.col-lg-12
       a(href='#/feed')
         i.fa.fa-rss(title="Feed")
         span.hidden-sm &nbsp; Feed
-    li.hidden(ng-show="$root.isLoggedIn")
-      a(href='#/new')
+    li(ng-show="$root.isLoggedIn")
+      a(href='#/inbox#compose')
         i.fa.fa-pencil(title="Compose")
         span.hidden-sm &nbsp; Compose
     li(ng-show="$root.isLoggedIn",ng-class="{active: isActive('/settings')}")
@@ -28,5 +28,6 @@ nav.col-lg-12
       a(href="#/",ng-click="logout()")
         i.fa.fa-sign-out(title="Logout")
         span.hidden-sm &nbsp; Logout
-input.form-control#search(type='search',placeholder='Search...')
+form(ng-submit="search(searchterm)")
+    input.form-control#search(type='search',placeholder='Search...',ng-model='searchterm')
 .alert.alert-success(ng-cloak,ng-show="null !== flashsuccess",role='alert') {{ flashsuccess }}

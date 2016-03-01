@@ -1,6 +1,6 @@
-export default async ($scope, feed) => {
+export default async ($scope, feed, $location) => {
     $scope.select = (id) => {
-        window.location.hash = '/message/' + id;
+        $location.path('/message/' + id);
     };
 
     let result = await feed.getFeed();
