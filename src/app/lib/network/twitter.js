@@ -1,6 +1,8 @@
 import TwitterAPI from 'twitter';
 import promisify from 'es6-promisify';
 import config from '../../../config/app';
+import moment from 'moment';
+moment.locale('en-gb');
 
 export default class Twitter {
     constructor(accesstoken, refreshtoken) {
@@ -28,7 +30,7 @@ export default class Twitter {
             return result.map((item) => ({
                 id: item.id,
                 from: (item.user)?item.user.name + ' (@' + item.user.screen_name + ')':'Twitter',
-                date: item.created_at,
+                date: moment(new Date(item.created_at)).format('lll'),
                 subject: item.text
             }));
         } catch (err) {

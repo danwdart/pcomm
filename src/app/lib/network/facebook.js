@@ -1,6 +1,8 @@
 import FB from 'fb';
 import promisify from 'es6-promisify';
 import config from '../../../config/app';
+import moment from 'moment';
+moment.locale('en-gb');
 
 export default class Facebook {
     constructor(accesstoken, refreshtoken) {
@@ -26,7 +28,7 @@ export default class Facebook {
         return response.data.map((item) => ({
             from: 'Facebook',
             subject: item.message,
-            date: item.created_time,
+            date: moment(new Date(item.created_time)).format('lll'),
             id: item.id
         }));
     }
