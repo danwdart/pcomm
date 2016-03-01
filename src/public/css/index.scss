@@ -1,5 +1,9 @@
 @charset "UTF-8";
-/* Custom things */
+
+a {
+    cursor: pointer;
+}
+
 table.messages {
     overflow: auto;
     height: auto;

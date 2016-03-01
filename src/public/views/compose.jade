@@ -1,2 +1,37 @@
-h3 Compose
-form
+.row.compose.hidden
+    .col-lg-12.well
+        a(ng-click='closeCompose()')
+            i.fa.fa-close
+            span.hidden-sm Close
+        h2.text-center Compose Message
+        br
+        form.form-horizontal
+            .form-group
+                label.col-lg-1.control-label(for='to') To
+                .col-lg-11
+                    input#to.form-control(type='email',placeholder='To...')
+            .form-group
+                label.col-lg-1.control-label(for='from') From
+                .col-lg-11
+                    input#from.form-control(type='email',placeholder='From...')
+            .form-group
+                label.col-lg-1.control-label(for='subject') Subject
+                .col-lg-11
+                    input#subject.form-control(type='email',placeholder='Subject...')
+            .form-group
+                label.col-lg-1.control-label(for='message') Message
+                .col-lg-11
+                    textarea#message.form-control(placeholder='Message...')
+            .form-group
+                .col-lg-offset-1
+                    .btn.btn-success
+                        i.fa.fa-paper-plane
+                        span.hidden-sm &nbsp; Send
+                    | &nbsp;
+                    .btn.btn-warning
+                        i.fa.fa-save
+                        span.hidden-sm &nbsp; Save as draft
+                    | &nbsp;
+                    .btn.btn-danger
+                        i.fa.fa-trash
+                        span.hidden-sm &nbsp; Discard  

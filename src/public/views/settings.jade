@@ -127,7 +127,7 @@
                     tbody
                         tr(ng-repeat='(id, row) in networks')
                             td
-                                i(ng-class="'fa fa-'+row.type")
+                                i(ng-class="'fa fa-'+(('email'==row.type)?'envelope':row.type)")
                             td {{ row.type }}
                             td {{ row.name }}
                             td

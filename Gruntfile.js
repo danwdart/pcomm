@@ -365,7 +365,7 @@ module.exports = function(grunt) {
                 },
                 files: [
                     'config/locals.json',
-                    'src/public/index.jade',
+                    'src/public/*.jade',
                     'src/public/views/**'
                 ],
                 tasks: [

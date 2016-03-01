@@ -1,7 +1,7 @@
 .row
     .col-lg-2
         .row
-            button.btn.btn-success.col-lg-12
+            button.btn.btn-success.col-lg-12(ng-click="compose()")
                 i.fa.fa-pencil(title='Compose')
                 span.hidden-sm &nbsp; Compose
         .row &nbsp;
@@ -50,6 +50,7 @@
             li(ng-foreach="folders")
                 a(href="#") {{ name }}
     .col-lg-10
+        include ./compose
         row
             .col-lg-12
                 button.btn.btn-default.col-lg-2

@@ -4,7 +4,6 @@ import InboxCtrl from '../controller/inboxctrl';
 import FeedCtrl from '../controller/feedctrl';
 import LoginCtrl from '../controller/loginctrl';
 import RegisterCtrl from '../controller/registerctrl';
-import ComposeCtrl from '../controller/composectrl';
 import MessageCtrl from '../controller/messagectrl';
 import SettingsCtrl from '../controller/settingsctrl';
 import NotFoundCtrl from '../controller/notfoundctrl';
@@ -66,13 +65,6 @@ export default (ngApp, jQuery) => {
                         controllerAs: 'feedctrl'
                     }
                 ).when(
-                    '/new',
-                    {
-                        templateUrl: 'views/compose.html',
-                        controller: 'ComposeCtrl',
-                        controllerAs: 'composectrl'
-                    }
-                ).when(
                     '/message/:id',
                     {
                         templateUrl: 'views/message.html',
@@ -109,7 +101,6 @@ export default (ngApp, jQuery) => {
     .controller('LoginCtrl', ['$scope', 'login', '$location', LoginCtrl])
     .controller('RegisterCtrl', ['$scope', 'register', '$location', RegisterCtrl])
     .controller('NotFoundCtrl', ['$scope', NotFoundCtrl])
-    .controller('ComposeCtrl', ['$scope', ComposeCtrl])
     .controller('MessageCtrl', ['$scope', MessageCtrl])
     .controller('SettingsCtrl', ['$scope', 'settings', SettingsCtrl])
 
