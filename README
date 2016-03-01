@@ -1,6 +1,6 @@
 pComm: Portable Communicator
 
-To include: webcomponents/polymer/grunt-angular-templates
+To include: webcomponents/polymer
 
 Deps:
 npm install
