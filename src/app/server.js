@@ -11,6 +11,7 @@ import config from '../config/app';
 import routes from './lib/routes';
 import ioroutes from './lib/ioroutes';
 import bgroutes from './lib/bgroutes';
+import repl from 'repl';
 
 // db setup
 import './lib/db';
@@ -52,8 +53,87 @@ ioroutes(io, XmppClient);
 
 bgroutes();
 
+let replServer = repl.start({prompt: 'pcomm > '});
+replServer.context.app = app;
+replServer.context.server = server;
+replServer.context.io = io;
+replServer.context.XmppClient = XmppClient;
+
+replServer.defineCommand('debug', {
+    help: 'Debug requests',
+    action: function(name) {
+        this.write('Listening for requests');
+        this.displayPrompt();
+        server.on('request', (request, socket, head) => {
+            this.write(request.method + ' ' +
+                'http://' + request.headers['x-forwarded-host'] + request.url + ' HTTP/' +
+                request.httpVersion + ' Referrer: ' +
+                request.headers.referer + ' User Agent: ' +
+                request.headers['user-agent'] + ' IP Address: ' +
+                request.headers['x-forwarded-for'] +
+                "\n"
+            );
+            this.displayPrompt();
+        });
+    }
+});
+
+replServer.defineCommand('stopdebug', {
+    help: 'Stop debugging requests',
+    action: function(name) {
+        server.off('request');
+        this.write('Debug stopped.'+"\n");
+        this.displayPrompt();
+    }
+});
+
+replServer.defineCommand('start', {
+    help: 'Start the server',
+    action: function(name) {
+        server.listen(port, ip, () => {
+            this.write('Listening on port', port, 'on IP', ip+"\n");
+            this.displayPrompt();
+        });
+    }
+});
+
+replServer.defineCommand('stop', {
+    help: 'Stop the server',
+    action: function(name) {
+        server.close(() => {
+            this.write('Server stopped.'+"\n");
+            this.displayPrompt();
+        });
+    }
+});
+
+replServer.defineCommand('restart', {
+    help: 'Restart the server',
+    action: function(name) {
+        server.close(() =>
+            server.listen(port, ip, () => {
+                this.write('Server restarted. Listening on port', port, 'on IP', ip+"\n")
+                this.displayPrompt();
+            })
+        );
+    }
+});
+
+replServer.on('exit', () => {
+    console.log('^D caught, exiting...');
+    server.close(() => process.exit());
+})
+
+process.on('SIGINT', () => {
+    console.log('SIGINT caught, exiting...');
+    server.close(() => process.exit());
+});
+
 server.listen(
     port,
     ip,
-    () => console.log('Listening on port', port, 'on IP', ip)
+    () => {
+        replServer.write('Listening on port', port, 'on IP', ip+"\n");
+        replServer.displayPrompt();
+    }
 );
