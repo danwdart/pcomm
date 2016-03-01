@@ -288,6 +288,7 @@ module.exports = function(grunt) {
                     'exorcise',
                     'concat',
                     'sass',
+                    'cssmin',
                     'appcache',
                     'forever:server:stop',
                     'forever:server:start'

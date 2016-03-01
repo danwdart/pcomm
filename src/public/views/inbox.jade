@@ -76,4 +76,5 @@
                         input(type='checkbox')
                     td(ng-click='select(row.id)') {{row.from}}
                     td(ng-click='select(row.id)') {{row.subject}}
-                    td(ng-click='select(row.id)') {{row.date}}
+                    td(ng-click='select(row.id)')
+                        nobr {{row.date}}

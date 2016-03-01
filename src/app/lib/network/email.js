@@ -1,4 +1,6 @@
 import Inbox from 'simple-imap-inbox';
+import moment from 'moment';
+moment.locale('en-gb');
 
 export default class Email {
     constructor(objNetwork) {
@@ -19,7 +21,7 @@ export default class Email {
             return messages.map((message)=>({
                 from: message.headers.from[0],
                 subject: message.headers.subject[0],
-                date: message.headers.date[0],
+                date: moment(new Date(message.headers.date[0])).format('lll'),
                 id: message.attributes.uid
             }));
         } catch (err) {
