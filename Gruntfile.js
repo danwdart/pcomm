@@ -374,6 +374,19 @@ module.exports = function(grunt) {
                     'appcache'
                 ]
             },
+            assets: {
+                options: {
+                    spawn: true,
+                    livereload: true
+                },
+                files: [
+                    'src/public/static/**/*'
+                ],
+                tasks: [
+                    /* having a clean would ruin everything */
+                    'copy:static'
+                ]
+            }
         }
     });
 
