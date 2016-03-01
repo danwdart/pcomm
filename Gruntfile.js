@@ -11,6 +11,11 @@ module.exports = function(grunt) {
                 src: [
                     './app/**/*'
                 ]
+            },
+            views: {
+                src: [
+                    './public/views'
+                ]
             }
         },
         eslint: {
@@ -81,6 +86,18 @@ module.exports = function(grunt) {
                         dest: 'public/src/css'
                     }
                 ]
+            }
+        },
+        ngtemplates: {
+            pcomm: {
+                cwd: 'public',
+                src: 'views/**/*.html',
+                dest: 'src/public/js/lib/templates.js',
+                options: {
+                    bootstrap: function(module, script) {
+                        return 'export default (ngApp) => ngApp.run([\'$templateCache\', ($templateCache) => {'+script+'}]);';
+                    }
+                }
             }
         },
         browserify: {
@@ -207,10 +224,10 @@ module.exports = function(grunt) {
                 cache: {
                     patterns: [
                         'public/index.html',
-                        'public/css/index.css',
+                        'public/css/**/*.css',
                         'public/js/**/*.js',
-                        'public/img/**/*',
-                        'public/views/**/*.html'
+                        'public/fonts/*',
+                        'public/img/**/*'
                     ]
                 },
                 network: ['*']
@@ -237,12 +254,14 @@ module.exports = function(grunt) {
                 tasks: [
                     'clean',
                     'copy',
+                    'jade',
+                    'ngtemplates',
+                    'clean:views',
                     'browserify',
                     'babel',
                     'exorcise',
                     'concat',
                     'sass',
-                    'jade',
                     'appcache',
                     'forever:server:stop',
                     'forever:server:start'
@@ -270,6 +289,8 @@ module.exports = function(grunt) {
                 tasks: [
                     'eslint:public',
                     'copy:js',
+                    'ngtemplates',
+                    'clean:views',
                     'browserify:app',
                     'exorcise:app',
                     'appcache'
@@ -319,6 +340,8 @@ module.exports = function(grunt) {
                 ],
                 tasks: [
                     'jade',
+                    'ngtemplates',
+                    'clean:views',
                     'appcache'
                 ]
             },
@@ -333,12 +356,14 @@ module.exports = function(grunt) {
             'copy',
             'eslint',
             'babel',
+            'jade',
+            'ngtemplates',
+            'clean:views',
             'browserify',
             'exorcise',
             'concat',
             'sass',
             'cssmin',
-            'jade',
             'appcache'
         ]
     );
@@ -349,11 +374,13 @@ module.exports = function(grunt) {
             'copy',
             'eslint',
             'babel',
+            'jade',
+            'ngtemplates',
+            'clean:views',
             'browserify:app',
             'exorcise:app',
             'sass',
             'cssmin:app',
-            'jade',
             'appcache'
         ]
     );

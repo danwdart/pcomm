@@ -20,7 +20,11 @@ import SettingsFactory from '../factory/settingsfactory';
 import FeedFactory from '../factory/feedfactory';
 import InboxFactory from '../factory/inboxfactory';
 
+import templates from './templates';
+
 export default (ngApp, jQuery) => {
+    templates(ngApp);
+
     ngApp.config(
         [
             '$routeProvider',
