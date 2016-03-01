@@ -7,6 +7,22 @@ module.exports = function(grunt) {
                     './public/**/*',
                 ]
             },
+            js: {
+                src: [
+                    './compiled/**/*',
+                    './public/js/**/*',
+                ]
+            },
+            css: {
+                src: [
+                    './public/css/index*.css'
+                ]
+            },
+            cssexternal: {
+                src: [
+                    './public/css/external*.css'
+                ]
+            },
             server: {
                 src: [
                     './app/**/*'
@@ -149,11 +165,11 @@ module.exports = function(grunt) {
                     'public/js/external.js': [
                         /* These must be in the right order of deps for now */
                         'public/src/external/jquery.js',
-                        'public/src/external/bootstrap.js',
+                        'public/src/external/bootstrap.js', // requires bootstrap
                         'public/src/external/angular.js',
-                        'public/src/external/angular-route.js',
+                        'public/src/external/angular-route.js', // requires angular
                         'public/src/external/sweetalert-dev.js',
-                        'public/src/external/swal-forms.js'
+                        'public/src/external/swal-forms.js' // requires swal
                     ]
                 }
             }
@@ -289,6 +305,7 @@ module.exports = function(grunt) {
                 tasks: [
                     'eslint:public',
                     'copy:js',
+                    'jade',
                     'ngtemplates',
                     'clean:views',
                     'browserify:app',
@@ -311,6 +328,7 @@ module.exports = function(grunt) {
                 },
                 files: 'src/public/css/**',
                 tasks: [
+                    'clean:css',
                     'copy:css',
                     'sass',
                     'cssmin:app',
@@ -324,6 +342,7 @@ module.exports = function(grunt) {
                 },
                 files: 'bower_components/**/*.css',
                 tasks: [
+                    'clean:cssexternal',
                     'cssmin:external',
                     'appcache'
                 ]

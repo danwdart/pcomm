@@ -1,8 +1,11 @@
 @charset "UTF-8";
 /* Custom things */
 table.messages {
+    overflow: auto;
+    height: auto;
+
     tr {
-        cursor: finger !important;
+        cursor: pointer;
         font-size: 12px;
     }
 }
@@ -22,4 +25,12 @@ table.messages {
 
 :-ms-input-placeholder {
     color: #333;
+}
+
+.fa {
+    min-width:15px;
+}
+
+.ng-cloak {
+    display: none;
 }
