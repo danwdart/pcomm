@@ -1,6 +1,6 @@
-export default async ($scope, inbox) => {
+export default async ($scope, inbox, $location) => {
     $scope.select = (id) => {
-        window.location.hash = '/message/' + id;
+        $location.path('/message/' + id);
     };
 
     $scope.compose = () => {
@@ -9,6 +9,10 @@ export default async ($scope, inbox) => {
 
     $scope.closeCompose = () => {
         $('.compose').hide(1000).addClass('hidden');
+    }
+
+    if ('compose' == $location.hash()) {
+        $scope.compose();
     }
 
     let result = await inbox.getInbox();

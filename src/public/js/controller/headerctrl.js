@@ -8,7 +8,11 @@ export default async ($scope, isLoggedIn, logout, $location) => {
         await logout();
         $scope.$root.isLoggedIn = false;
         $scope.$root.$apply();
-        $location.hash('/');
+        $location.path('/');
+    }
+
+    $scope.search = (searchterm) => {
+        $location.path('search?q='+searchterm);
     }
 
     let status = await isLoggedIn();
