@@ -33,22 +33,11 @@
             li
                 a(href="#")
                     i.fa.fa-trash
-                    span.hidden-sm &nbsp; Recycling
-            li
+                    span.hidden-sm &nbsp; Recycling                
+            li(ng-repeat="folder in folders")
                 a(href="#")
-                    i.fa.fa-envelope
-                    span.hidden-sm &nbsp; Email
-            li
-                a(href="#")
-                    i.fa.fa-facebook
-                    span.hidden-sm &nbsp; Facebook
-            li
-                a(href="#")
-                    i.fa.fa-twitter
-                    span.hidden-sm &nbsp; Twitter
-                
-            li(ng-foreach="folders")
-                a(href="#") {{ name }}
+                    i(ng-class="'fa fa-'+(('email' == folder.type)?'envelope':folder.type)")
+                    span.hidden-sm &nbsp; {{ folder.name }}
     .col-lg-10
         include ./compose
         row

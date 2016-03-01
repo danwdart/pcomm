@@ -4,6 +4,14 @@ a {
     cursor: pointer;
 }
 
+.compose {
+    display: none;
+}
+
+.big {
+    padding: 10px 15px;
+}
+
 table.messages {
     overflow: auto;
     height: auto;

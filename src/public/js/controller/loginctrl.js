@@ -8,6 +8,7 @@ export default ($scope, login, $location, jQuery) => {
         let result = await login($scope.username, $scope.password);
 
         $scope.$root.isLoggedIn = result.isLoggedIn;
+        $scope.$root.username = result.isLoggedIn?$scope.username:null;
         $scope.$root.$apply();
 
         if (result.isLoggedIn)

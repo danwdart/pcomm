@@ -18,6 +18,15 @@ export default class Facebook {
         });
     }
 
+    async getFolders() {
+        return [
+            {
+                name: 'Facebook',
+                type: 'facebook'
+            }
+        ];
+    }
+
     getInbox() {
         return [];
     }

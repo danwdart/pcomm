@@ -28,6 +28,9 @@ nav.col-lg-12
       a(href="#/",ng-click="logout()")
         i.fa.fa-sign-out(title="Logout")
         span.hidden-sm &nbsp; Logout
+    li.pull-right
+        .big(ng-show='!$root.isLoggedIn') Not logged in
+        .big(ng-show='$root.isLoggedIn') Logged in as {{$root.username}}
 form(ng-submit="search(searchterm)")
     input.form-control#search(type='search',placeholder='Search...',ng-model='searchterm')
 .alert.alert-success(ng-cloak,ng-show="null !== flashsuccess",role='alert') {{ flashsuccess }}

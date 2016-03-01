@@ -29,6 +29,14 @@ export default class Email {
             return [];
         }
     }
+    async getFolders() {
+        return [
+            {
+                name: this.objNetwork.name,
+                type: this.objNetwork.type
+            }
+        ];
+    }
 
     async getFeed() {
         return [];
