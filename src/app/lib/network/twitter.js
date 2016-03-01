@@ -5,12 +5,14 @@ import moment from 'moment';
 moment.locale('en-gb');
 
 export default class Twitter {
-    constructor(accesstoken, refreshtoken) {
+    constructor(objNetwork) {
+        this.objNetwork = objNetwork;
+
         this._client = new TwitterAPI({
             consumer_key: config.oauth.twitter.consumerKey,
             consumer_secret: config.oauth.twitter.consumerSecret,
-            access_token_key: accesstoken,
-            access_token_secret: refreshtoken
+            access_token_key: objNetwork.accesstoken,
+            access_token_secret: objNetwork.refreshtoken
         });
 
         this._client.pget = promisify(this._client.get, function(err, result, response) {
@@ -23,7 +25,7 @@ export default class Twitter {
     async getFolders() {
         return [
             {
-                name: 'Twitter',
+                name: this.objNetwork.name,
                 type: 'twitter'
             }
         ];
