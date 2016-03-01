@@ -1,12 +1,64 @@
-table.messages.table.table-striped.table-hover
-  thead
-    tr
-      th From
-      th Subject
-      th Date
-  tbody
-    tr(ng-repeat='row in tableRows',ng-click='select(row.id)')
-      a(href='/#/message/{{row.id}}')
-      td {{row.from}}
-      td {{row.subject}}
-      td {{row.date}}
+.row
+    .col-lg-2
+        .row
+            button.btn.btn-success.col-lg-12
+                i.fa.fa-pencil(title='Compose')
+                span.hidden-sm &nbsp; Compose
+        .row &nbsp;
+        .nav.nav-pills.nav-stacked
+            li.active
+                a(href="#")
+                    i.fa.fa-envelope
+                    span.hidden-sm &nbsp; Inbox
+            li
+                a(href="#")
+                    i.fa.fa-pencil
+                    span.hidden-sm &nbsp; Drafts
+            li
+                a(href="#")
+                    i.fa.fa-envelope
+                    span.hidden-sm &nbsp; Sent Mail
+            li
+                a(href="#")
+                    i.fa.fa-clock-o
+                    span.hidden-sm &nbsp; Archive
+            li
+                a(href="#")
+                    i.fa.fa-envelope
+                    span.hidden-sm &nbsp; All Mail
+            li
+                a(href="#") 
+                    i.fa.fa-exclamation-triangle
+                    span.hidden-sm &nbsp; Spam
+            li
+                a(href="#")
+                    i.fa.fa-trash
+                    span.hidden-sm &nbsp; Recycling
+            li
+                a(href="#")
+                    i.fa.fa-envelope
+                    span.hidden-sm &nbsp; Email
+            li
+                a(href="#")
+                    i.fa.fa-facebook
+                    span.hidden-sm &nbsp; Facebook
+            li
+                a(href="#")
+                    i.fa.fa-twitter
+                    span.hidden-sm &nbsp; Twitter
+                
+            li(ng-foreach="folders")
+                a(href="#") {{ name }}
+    .col-lg-10
+        table.messages.table.table-striped.table-hover
+          thead
+            tr
+              th From
+              th Subject
+              th Date
+          tbody
+            tr(ng-repeat='row in tableRows',ng-click='select(row.id)')
+              a(href='/#/message/{{row.id}}')
+              td {{row.from}}
+              td {{row.subject}}
+              td {{row.date}}
