@@ -13,10 +13,7 @@ export default async (req, res) => {
         let network = networks[id];
         switch(network.type) {
             case 'facebook':
-                objNetwork = new FacebookNetwork(
-                    network.accessToken,
-                    network.refreshToken
-                );
+                objNetwork = new FacebookNetwork(network);
                 try {
                     objInbox = await objNetwork.getInbox();
                 } catch (err) {
@@ -28,10 +25,7 @@ export default async (req, res) => {
                 }
                 break;
             case 'twitter':
-                objNetwork = new TwitterNetwork(
-                    network.accessToken,
-                    network.refreshToken
-                );
+                objNetwork = new TwitterNetwork(network);
                 try {
                     objInbox = await objNetwork.getInbox();
                 } catch (err) {
@@ -72,10 +66,7 @@ export async function folders(req, res) {
         let network = networks[id];
         switch(network.type) {
             case 'facebook':
-                objNetwork = new FacebookNetwork(
-                    network.accessToken,
-                    network.refreshToken
-                );
+                objNetwork = new FacebookNetwork(network);
                 try {
                     objFolders = await objNetwork.getFolders();
                 } catch (err) {
@@ -87,10 +78,7 @@ export async function folders(req, res) {
                 }
                 break;
             case 'twitter':
-                objNetwork = new TwitterNetwork(
-                    network.accessToken,
-                    network.refreshToken
-                );
+                objNetwork = new TwitterNetwork(network);
                 try {
                     objFolders = await objNetwork.getFolders();
                 } catch (err) {

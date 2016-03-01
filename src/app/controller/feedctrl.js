@@ -11,10 +11,7 @@ export default async (req, res) => {
         let network = networks[id];
         switch(network.type) {
             case 'facebook':
-                objNetwork = new FacebookNetwork(
-                    network.accessToken,
-                    network.refreshToken
-                );
+                objNetwork = new FacebookNetwork(network);
                 try {
                     objFeed = await objNetwork.getFeed();
                 } catch (err) {
@@ -26,10 +23,7 @@ export default async (req, res) => {
                 }
                 break;
             case 'twitter':
-                objNetwork = new TwitterNetwork(
-                    network.accessToken,
-                    network.refreshToken
-                );
+                objNetwork = new TwitterNetwork(network);
                 try {
                     objFeed = await objNetwork.getFeed();
                 } catch (err) {
