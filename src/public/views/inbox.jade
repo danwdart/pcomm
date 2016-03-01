@@ -20,7 +20,7 @@
                     span.hidden-sm &nbsp; Sent Mail
             li
                 a(href="#")
-                    i.fa.fa-clock-o
+                    i.fa.fa-archive
                     span.hidden-sm &nbsp; Archive
             li
                 a(href="#")
@@ -28,7 +28,7 @@
                     span.hidden-sm &nbsp; All Mail
             li
                 a(href="#") 
-                    i.fa.fa-exclamation-triangle
+                    i.fa.fa-warning
                     span.hidden-sm &nbsp; Spam
             li
                 a(href="#")
@@ -50,15 +50,30 @@
             li(ng-foreach="folders")
                 a(href="#") {{ name }}
     .col-lg-10
+        row
+            .col-lg-12
+                button.btn.btn-default.col-lg-2
+                    i.fa.fa-archive
+                    span.hidden-sm &nbsp; Archive
+                button.btn.btn-default.col-lg-2
+                    i.fa.fa-warning
+                    span.hidden-sm &nbsp; Spam
+                button.btn.btn-default.col-lg-2
+                    i.fa.fa-envelope
+                    span.hidden-sm &nbsp; Mark as Read
+                
         table.messages.table.table-striped.table-hover
-          thead
-            tr
-              th From
-              th Subject
-              th Date
-          tbody
-            tr(ng-repeat='row in tableRows',ng-click='select(row.id)')
-              a(href='/#/message/{{row.id}}')
-              td {{row.from}}
-              td {{row.subject}}
-              td {{row.date}}
+            thead
+                tr
+                    th
+                        input.select-all(type='checkbox')
+                    th From
+                    th Subject
+                    th Date
+            tbody
+                tr(ng-repeat='row in tableRows')
+                    td
+                        input(type='checkbox')
+                    td(ng-click='select(row.id)') {{row.from}}
+                    td(ng-click='select(row.id)') {{row.subject}}
+                    td(ng-click='select(row.id)') {{row.date}}

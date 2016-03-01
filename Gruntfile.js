@@ -102,6 +102,16 @@ module.exports = function(grunt) {
                         dest: 'public/src/css'
                     }
                 ]
+            },
+            static: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/public/static',
+                        src: ['**/*'],
+                        dest: 'public/'
+                    }
+                ]
             }
         },
         ngtemplates: {
