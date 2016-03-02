@@ -1,6 +1,6 @@
 export default ($http) => ({
-    async getInbox() {
-        let result = await $http.get('/inbox');
+    async getInbox(folder) {
+        let result = await $http.get('/inbox?folder='+folder);
         return result.data;
     },
 

@@ -1,4 +1,7 @@
 export default async ($scope, inbox, $location) => {
+    $scope.isFolderActive = (id) => id == $location.hash() ||
+        ('inbox' == id && '' == $location.hash());
+
     $scope.select = (id) => {
         $('#message'+id).show();
     };
@@ -15,7 +18,7 @@ export default async ($scope, inbox, $location) => {
         $scope.compose();
     }
 
-    $scope.tableRows = await inbox.getInbox();
+    $scope.tableRows = await inbox.getInbox($location.hash());
     $scope.$apply();
 
     $scope.folders = await inbox.getFolders();
