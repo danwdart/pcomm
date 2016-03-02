@@ -5,37 +5,37 @@
                 i.fa.fa-pencil(title='Compose')
                 span.hidden-sm &nbsp; Compose
         .row &nbsp;
-        .nav.nav-pills.nav-stacked
-            li.active
-                a(href="#")
+        .nav.nav-pills.nav-stacked.folders
+            li(ng-class="{active:isFolderActive('inbox')}")
+                a(href='#/inbox#inbox')
                     i.fa.fa-envelope
                     span.hidden-sm &nbsp; Inbox
-            li
-                a(href="#")
+            li(ng-class="{active:isFolderActive('drafts')}")
+                a(href='#/inbox#drafts')
                     i.fa.fa-pencil
                     span.hidden-sm &nbsp; Drafts
-            li
-                a(href="#")
+            li(ng-class="{active:isFolderActive('sent')}")
+                a(href='#/inbox#sent')
                     i.fa.fa-envelope
                     span.hidden-sm &nbsp; Sent Mail
-            li
-                a(href="#")
+            li(ng-class="{active:isFolderActive('archive')}")
+                a(href='#/inbox#archive')
                     i.fa.fa-archive
                     span.hidden-sm &nbsp; Archive
-            li
-                a(href="#")
+            li(ng-class="{active:isFolderActive('all')}")
+                a(href='#/inbox/#all')
                     i.fa.fa-envelope
                     span.hidden-sm &nbsp; All Mail
-            li
-                a(href="#") 
+            li(ng-class="{active:isFolderActive('spam')}")
+                a(href='#/inbox/#spam') 
                     i.fa.fa-warning
                     span.hidden-sm &nbsp; Spam
-            li
-                a(href="#")
+            li(ng-class="{active:isFolderActive('recycling')}")
+                a(href='#/inbox/#recycling')
                     i.fa.fa-trash
                     span.hidden-sm &nbsp; Recycling                
-            li(ng-repeat="folder in folders")
-                a(href="#")
+            li(ng-repeat="folder in folders",ng-class="{active:isFolderActive(folder.name)}")
+                a(href='#inbox/#folder.name')
                     i(ng-class="'fa fa-'+(('email' == folder.type)?'envelope':folder.type)")
                     span.hidden-sm &nbsp; {{ folder.name }}
     .col-lg-10
