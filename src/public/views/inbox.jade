@@ -35,7 +35,7 @@
                     i.fa.fa-trash
                     span.hidden-sm &nbsp; Recycling                
             li(ng-repeat="folder in folders",ng-class="{active:isFolderActive(folder.name)}")
-                a(href='#inbox/#folder.name')
+                a(href='#inbox/#{{folder.name}}')
                     i(ng-class="'fa fa-'+(('email' == folder.type)?'envelope':folder.type)")
                     span.hidden-sm &nbsp; {{ folder.name }}
     .col-lg-10

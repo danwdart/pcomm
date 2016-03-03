@@ -1,16 +1,14 @@
-import AbstractNetwork from '../lib/network/abstract';
+import Message from '../lib/model/message';
+import Folder from '../lib/model/folder';
 
-// for now it is live but we should save later
 export default async (req, res) => {
-    let networks = req.session.user.networks,
-        arrInbox = await AbstractNetwork.getInbox(networks);
+    let arrInbox = await Message.find({username: req.session.user.username});
 
     return res.send(arrInbox);
 }
 
 export async function folders(req, res) {
-    let networks = req.session.user.networks,
-        arrFolders = await AbstractNetwork.getFolders(networks);
+    let arrFolders = await Folder.find({username: req.session.user.username});
 
     return res.send(arrFolders);
 }
