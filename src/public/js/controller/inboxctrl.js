@@ -18,9 +18,9 @@ export default async ($scope, inbox, $location) => {
         $scope.compose();
     }
 
-    $scope.tableRows = await inbox.getInbox($location.hash());
+    $scope.folders = await inbox.getFolders();
     $scope.$apply();
 
-    $scope.folders = await inbox.getFolders();
+    $scope.tableRows = await inbox.getInbox($location.hash());
     $scope.$apply();
 };

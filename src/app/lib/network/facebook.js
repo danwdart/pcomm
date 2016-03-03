@@ -15,6 +15,8 @@ export default class Facebook {
         FB.setAccessToken(objNetwork.accesstoken);
         //FB.setRefreshToken(refreshtoken);
         FB.papi = promisify(FB.api, function(result) {
+            if (result.error)
+                return this.reject(result);
             return this.resolve(result)
         });
     }
@@ -33,13 +35,18 @@ export default class Facebook {
     }
 
     async getFeed() {
-        let response = await FB.papi('/me/feed');
+        try {
+            let response = await FB.papi('/me/feed');
 
-        return response.data.map((item) => ({
-            from: 'Facebook',
-            subject: item.message,
-            date: moment(new Date(item.created_time)).format('lll'),
-            id: item.id
-        }));
+            return response.data.map((item) => ({
+                from: 'Facebook',
+                subject: item.message,
+                date: moment(new Date(item.created_time)).format('lll'),
+                id: item.id
+            }));
+        } catch (err) {
+            console.log(err);
+            return [];
+        }
     }
 }
