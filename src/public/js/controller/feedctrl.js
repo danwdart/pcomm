@@ -3,8 +3,6 @@ export default async ($scope, feed, $location) => {
         $location.path('/message/' + id);
     };
 
-    let result = await feed.getFeed();
-
-    $scope.tableRows = result;
+    $scope.tableRows = await feed.getFeed();
     $scope.$apply();
 };

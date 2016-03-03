@@ -1,9 +1,7 @@
-import AbstractNetwork from '../lib/network/abstract';
+import Feed from '../lib/model/feed';
 
 export default async (req, res) => {
-    let networks = req.session.user.networks,
-        arrFeed = await AbstractNetwork.getFeeds(networks);
-    console.log(arrFeed)
+    let arrFeed = await Feed.find({user: req.session.user.username});
 
     return res.send(arrFeed);
 }
