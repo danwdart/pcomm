@@ -61,10 +61,74 @@
                     th Subject
                     th Date
             tbody
-                tr(ng-repeat='row in tableRows')
-                    td
-                        input(type='checkbox')
-                    td(ng-click='select(row.id)') {{row.from}}
-                    td(ng-click='select(row.id)') {{row.subject}}
-                    td(ng-click='select(row.id)')
-                        nobr {{row.date}}
+                tbody(ng-repeat='row in tableRows')
+                    tr
+                        td
+                            input(type='checkbox')
+                        td(ng-click='toggleselect($event, row)') {{row.from}}
+                        td(ng-click='toggleselect($event, row)') {{row.subject}}
+                        td(ng-click='toggleselect($event, row)')
+                            nobr {{row.date}}
+                    tr.hideit(data-id='{{row._id}}')
+                        td(colspan='4')
+                            a(href='',ng-click='toggleselect($event, row)')
+                                i.fa.fa-close
+                                span.hidden-sm &nbsp; Close
+                            .well
+                                blockquote
+                                    p {{row.subject}}
+                                .row
+                                    .col-lg-12
+                                        .btn.btn-success(ng-click='row.showreply = true')
+                                            i.fa.fa-reply
+                                            span.hidden-sm &nbsp; Reply
+                                        | &nbsp;
+                                        .btn.btn-primary(ng-click='row.showforward = true')
+                                            i.fa.fa-mail-forward
+                                            span.hidden-sm &nbsp; Forward
+                                        | &nbsp;
+                                        .btn.btn-danger
+                                            i.fa.fa-close
+                                            span.hidden-sm &nbsp; Delete
+                                .row
+                                    .col-lg-12(ng-show='row.showreply')
+                                        hr
+                                        form.form-horizontal
+                                            .form-group
+                                                .well
+                                                    textarea.form-control.col-lg-12 > {{row.subject}}
+                                            hr
+                                            .row
+                                                .col-lg-12
+                                                    .btn.btn-success
+                                                        i.fa.fa-send
+                                                        span.hidden-sm &nbsp; Send
+                                                    | &nbsp;
+                                                    .btn.btn-primary
+                                                        i.fa.fa-save
+                                                        span.hidden-sm &nbsp; Save as draft
+                                                    | &nbsp;
+                                                    .btn.btn-danger
+                                                        i.fa.fa-close
+                                                        span.hidden-sm &nbsp; Discard
+                                    .col-lg-12(ng-show='row.showforward')
+                                        hr
+                                        form.form-horizontal
+                                            .form-group
+                                                .well
+                                                    textarea.form-control.col-lg-12 {{row.subject}}
+                                            hr
+                                            .row
+                                                .col-lg-12
+                                                    .btn.btn-success
+                                                        i.fa.fa-send
+                                                        span.hidden-sm &nbsp; Send
+                                                    | &nbsp;
+                                                    .btn.btn-primary
+                                                        i.fa.fa-save
+                                                        span.hidden-sm &nbsp; Save as draft
+                                                    | &nbsp;
+                                                    .btn.btn-danger
+                                                        i.fa.fa-close
+                                                        span.hidden-sm &nbsp; Discard
+                                    

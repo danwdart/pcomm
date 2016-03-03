@@ -2,8 +2,8 @@ export default async ($scope, inbox, $location) => {
     $scope.isFolderActive = (id) => id == $location.hash() ||
         ('inbox' == id && '' == $location.hash());
 
-    $scope.select = (id) => {
-        $('#message'+id).show();
+    $scope.toggleselect = (ev, row) => {
+        $('[data-id="'+row._id+'"]').toggle(500);
     };
 
     $scope.compose = () => {
