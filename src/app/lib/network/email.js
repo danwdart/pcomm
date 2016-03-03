@@ -17,7 +17,9 @@ export default class Email {
                 tls: true
             });
             await inbox.connect(true);
-            let messages = await inbox.fetch(10);
+            let numMessages = inbox.inbox.messages.total;
+            console.log('Downloading', numMessages, 'messages');
+            let messages = await inbox.fetch(numMessages);
             return messages.map((message)=>({
                 from: message.headers.from[0],
                 subject: message.headers.subject[0],
@@ -31,23 +33,10 @@ export default class Email {
     }
 
     async getFolders() {
-        try {
-            let inbox = new Inbox({
-                user: this.objNetwork.name,
-                password: this.objNetwork.password,
-                host: this.objNetwork.imap,
-                port: 993,
-                tls: true
-            });
-            await inbox.connect(true);
-
-            console.log({folders: inbox.inbox});
-
-            return [];
-        } catch (err) {
-            console.log('caught here', err);
-            return [];
-        }
+        return [{
+            name: this.objNetwork.name,
+            type: this.objNetwork.type
+        }]
     }
 
     async getFeed() {
