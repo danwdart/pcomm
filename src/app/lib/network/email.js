@@ -29,6 +29,7 @@ export default class Email {
             return [];
         }
     }
+    
     async getFolders() {
         return [
             {
