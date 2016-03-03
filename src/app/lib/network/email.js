@@ -29,14 +29,25 @@ export default class Email {
             return [];
         }
     }
-    
+
     async getFolders() {
-        return [
-            {
-                name: this.objNetwork.name,
-                type: this.objNetwork.type
-            }
-        ];
+        try {
+            let inbox = new Inbox({
+                user: this.objNetwork.name,
+                password: this.objNetwork.password,
+                host: this.objNetwork.imap,
+                port: 993,
+                tls: true
+            });
+            await inbox.connect(true);
+
+            console.log({folders: inbox.inbox});
+
+            return [];
+        } catch (err) {
+            console.log('caught here', err);
+            return [];
+        }
     }
 
     async getFeed() {

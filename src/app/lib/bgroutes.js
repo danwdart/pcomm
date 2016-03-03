@@ -18,6 +18,7 @@ let importall = async () => {
 
         console.log('Saving feeds');
         for (let feed of feeds) {
+
             let modelFeed = new Feed();
 
             Object.assign(modelFeed, feed);
@@ -26,7 +27,7 @@ let importall = async () => {
             modelFeed._id = md5(String(feed.id));
 
             console.log('Saving feed', feed.id);
-            await modelFeed.save();
+            await modelFeed.saveOverwrite();
             console.log('Saved feed', feed.id);
         }
         console.log('Saved feeds')
@@ -44,7 +45,7 @@ let importall = async () => {
             modelMessage._id = md5(String(message.id));
 
             console.log('Saving message', message.id);
-            await modelMessage.save();
+            await modelMessage.saveOverwrite();
             console.log('Saved message', message.id);
         }
         console.log('Saved inbox');
@@ -62,7 +63,7 @@ let importall = async () => {
             modelFolder._id = md5(String(user.name + folder.name));
 
             console.log('Saving folder', folder.name);
-            await modelFolder.save();
+            await modelFolder.saveOverwrite();
             console.log('Saved folder', folder.name);
         }
         console.log('Saved folders');
