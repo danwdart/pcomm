@@ -7,10 +7,14 @@ import {
 } from '../controller/authctrl';
 import SettingsCtrl, {
     email as SettingsEmailCtrl,
-    deleteNetwork as SettingsDeleteNetworkCtrl
+    deleteNetwork as SettingsDeleteNetworkCtrl,
+    xmpp as SettingsXMPPCtrl,
+    rss as SettingsRSSCtrl
 } from '../controller/settingsctrl';
 import FeedCtrl from '../controller/feedctrl';
-import InboxCtrl, {folders as InboxFoldersCtrl} from '../controller/inboxctrl';
+import InboxCtrl, {
+    folders as InboxFoldersCtrl
+} from '../controller/inboxctrl';
 
 import Facebook from './passport/facebook';
 import Twitter from './passport/twitter';
@@ -24,6 +28,8 @@ export default (app) => {
     app.get('/status', StatusCtrl);
     app.get('/settings', requireLogin, SettingsCtrl);
     app.post('/settings/email', requireLogin, SettingsEmailCtrl);
+    app.post('/settings/xmpp', requireLogin, SettingsXMPPCtrl);
+    app.post('/settings/rss', requireLogin, SettingsRSSCtrl);
     app.delete('/settings/network/:id', requireLogin, SettingsDeleteNetworkCtrl);
     app.get('/feed', requireLogin, FeedCtrl);
     app.get('/inbox', requireLogin, InboxCtrl);

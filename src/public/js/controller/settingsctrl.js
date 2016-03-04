@@ -65,6 +65,63 @@ export default async ($scope, settings, jQuery) => {
         $scope.$apply();
     };
 
+    $scope.setupXMPP = async () => {
+        let context = await swal.withFormAsync(
+            {
+                title: 'Setup XMPP/Jabber',
+                text: 'Please enter information about your XMPP/Jabber server',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+                closeOnConfirm: true,
+                formFields: [
+                    {
+                        id: 'server',
+                        placeholder: 'Server'
+                    },
+                    {
+                        id: 'name',
+                        placeholder: 'Account Name'
+                    },
+                    {
+                        id: 'password',
+                        placeholder: 'Password',
+                        type: 'password'
+                    }
+                ]
+            }
+        );
+
+        if (!context._isConfirm) return;
+        $scope.networks = await settings.addXMPPAccount(context.swalForm);
+        $scope.$apply();
+    };
+
+    $scope.setupRSS = async () => {
+        let context = await swal.withFormAsync(
+            {
+                title: 'Setup RSS feed',
+                text: 'Please enter information about your RSS feed',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+                closeOnConfirm: true,
+                formFields: [
+                    {
+                        id: 'name',
+                        placeholder: 'Name'
+                    },
+                    {
+                        id: 'url',
+                        placeholder: 'URL'
+                    }
+                ]
+            }
+        );
+
+        if (!context._isConfirm) return;
+        $scope.networks = await settings.addRSSFeed(context.swalForm);
+        $scope.$apply();
+    };
+
     $scope.delete = (id) => {
         swal(
             {

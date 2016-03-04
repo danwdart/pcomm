@@ -49,4 +49,7 @@ export default class Twitter {
             return [];
         }
     }
+
+    getLiveMessages() {
+    }
 }

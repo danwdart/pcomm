@@ -49,4 +49,7 @@ export default class Facebook {
             return [];
         }
     }
+
+    getLiveMessages() {
+    }
 }
