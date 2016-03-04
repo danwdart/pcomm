@@ -1,13 +1,17 @@
 import Email from './email';
 import Facebook from './facebook';
 import Twitter from './twitter';
+import RSS from './rss';
+import XMPP from './xmpp';
 
 export default class Abstract {
     static create(objNetwork) {
         let objTypes = {
             email: Email,
             facebook: Facebook,
-            twitter: Twitter
+            twitter: Twitter,
+            rss: RSS,
+            xmpp: XMPP
         };
 
         if ('undefined' == typeof objTypes[objNetwork.type])

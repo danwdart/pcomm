@@ -42,4 +42,7 @@ export default class Email {
     async getFeed() {
         return [];
     }
+
+    getLiveMessages() {
+    }
 }

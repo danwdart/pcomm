@@ -7,73 +7,99 @@ import md5 from './md5';
 
 let importall = async () => {
     try {
-    let users = await User.find();
+        let users = await User.find();
 
-    users.forEach(async (user) => {
-        try {
-        console.log('Importing for', user.username);
+        users.forEach(async (user) => {
+            try {
+                console.log('Importing for', user.username);
 
-        console.log('Importing feeds');
-        let feeds = await AbstractNetwork.getFeeds(user.networks);
+                console.log('Importing feeds');
+                let feeds = await AbstractNetwork.getFeeds(user.networks);
 
-        console.log('Saving feeds');
-        for (let feed of feeds) {
+                console.log('Saving feeds');
+                for (let feed of feeds) {
 
-            let modelFeed = new Feed();
+                    let modelFeed = new Feed();
 
-            Object.assign(modelFeed, feed);
+                    Object.assign(modelFeed, feed);
 
-            modelFeed.username = user.username;
-            modelFeed._id = md5(String(feed.id));
+                    modelFeed.username = user.username;
+                    modelFeed._id = md5(String(feed.id));
 
-            console.log('Saving feed', feed.id);
-            await modelFeed.saveOverwrite();
-            console.log('Saved feed', feed.id);
-        }
-        console.log('Saved feeds')
+                    console.log('Saving feed', feed.id);
+                    await modelFeed.saveOverwrite();
+                    console.log('Saved feed', feed.id);
+                }
+                console.log('Saved feeds')
 
-        console.log('Importing inbox');
-        let inbox = await AbstractNetwork.getInbox(user.networks);
+                console.log('Importing inbox');
+                let inbox = await AbstractNetwork.getInbox(user.networks);
 
-        console.log('Saving inbox');
-        for (let message of inbox) {
-            let modelMessage = new Message();
+                console.log('Saving inbox');
+                for (let message of inbox) {
+                    let modelMessage = new Message();
 
-            Object.assign(modelMessage, message);
+                    Object.assign(modelMessage, message);
 
-            modelMessage.username = user.username;
-            modelMessage._id = md5(String(message.id));
+                    modelMessage.username = user.username;
+                    modelMessage._id = md5(String(message.id));
 
-            console.log('Saving message', message.id);
-            await modelMessage.saveOverwrite();
-            console.log('Saved message', message.id);
-        }
-        console.log('Saved inbox');
+                    console.log('Saving message', message.id);
+                    await modelMessage.saveOverwrite();
+                    console.log('Saved message', message.id);
+                }
+                console.log('Saved inbox');
 
-        console.log('Importing folders')
-        let folders = await await AbstractNetwork.getFolders(user.networks);
+                console.log('Importing folders')
+                let folders = await await AbstractNetwork.getFolders(user.networks);
 
-        console.log('Saving folders');
-        for (let folder of folders) {
-            let modelFolder = new Folder();
+                console.log('Saving folders');
+                for (let folder of folders) {
+                    let modelFolder = new Folder();
 
-            Object.assign(modelFolder, folder);
+                    Object.assign(modelFolder, folder);
 
-            modelFolder.username = user.username;
-            modelFolder._id = md5(String(user.name + folder.name));
+                    modelFolder.username = user.username;
+                    modelFolder._id = md5(String(user.name + folder.name));
 
-            console.log('Saving folder', folder.name);
-            await modelFolder.saveOverwrite();
-            console.log('Saved folder', folder.name);
-        }
-        console.log('Saved folders');
-    } catch (err) {
-        console.log('arse', err, err.stack);
+                    console.log('Saving folder', folder.name);
+                    await modelFolder.saveOverwrite();
+                    console.log('Saved folder', folder.name);
+                }
+                console.log('Saved folders');
+            } catch (err) {
+                console.log(err, err.stack);
+            }
+        })
     }
-    })
-}
-catch (err) { console.log('bum', err)}
+    catch (err) {
+        console.log(err);
+    }
 };
+
+let loginLive = async () => {
+    try {
+        let users = await User.find();
+
+        users.forEach(async (user) => {
+            let hMsg = AbstractNetwork.getLiveMessages(user.networks);
+            hMsg.on('message', async (message) => {
+                let modelMessage = new Message();
+
+                Object.assign(modelMessage, message);
+
+                modelMessage.username = user.username;
+                modelMessage._id = md5(String(message.id));
+
+                console.log('Saving message', message.id);
+                await modelMessage.saveOverwrite();
+                console.log('Saved message', message.id);
+            });
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 export default async () => {
     // Import network mail on a timed basis
@@ -81,7 +107,11 @@ export default async () => {
 
     setTimeout(importall, 5*60*1000);
 
-    await importall();
+    // Background: don't await.
+    importall();
+
+    console.log('Logging in live')
 
     // Set up listeners for push events and push to browser and db
+    loginLive();
 };
