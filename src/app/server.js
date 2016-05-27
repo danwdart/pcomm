@@ -14,7 +14,7 @@ import bgroutes from './lib/bgroutes';
 import repl from 'repl';
 
 // db setup
-import './lib/db';
+import db from './lib/db';
 
 let app = express(),
     server = http.Server(app),
@@ -24,7 +24,13 @@ let app = express(),
         process.env.PORT,
     ip = ('undefined' === typeof process.env.IP)?
         config.ip:
-        process.env.IP;
+        process.env.IP,
+    // for docker
+    dbhost = ('undefined' === typeof process.env.MONGO_PORT_27017_TCP_ADDR)?
+        config.database.host:
+        process.env.MONGO_PORT_27017_TCP_ADDR;
+
+db(dbhost);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
