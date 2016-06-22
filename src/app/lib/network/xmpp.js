@@ -31,7 +31,7 @@ export default class XMPP {
         let emitter = new EventEmitter(this.objNetwork);
 
         let client = new XmppClient({
-            jid:  this.objNetwork.server + '@' + this.objNetwork.name,
+            jid:  this.objNetwork.name + '@' + this.objNetwork.server,
             password: this.objNetwork.password
         });
 

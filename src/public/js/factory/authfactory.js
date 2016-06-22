@@ -10,7 +10,10 @@ export function LoginFactory($http) {
             );
 
             if (204 == response.status) {
-                return {isLoggedIn: true}
+                return {
+                    isLoggedIn: true,
+                    username
+                }
             }
         } catch (err) {
             if (401 == err.status)
@@ -32,7 +35,10 @@ export function RegisterFactory($http) {
                 }
             );
 
-            return {success: true};
+            return {
+                success: true,
+                username
+            };
         } catch (err) {
             return {error: true};
         }

@@ -49,6 +49,12 @@ export function LogoutCtrl(req, res) {
 
 export function StatusCtrl(req, res) {
     if ('undefined' !== typeof req.session.user)
-        return res.send(true);
-    return res.send(false);
+        return res.send({
+            isLoggedIn: true,
+            username: req.session.user.username
+        });
+    return res.send({
+        isLoggedIn: false,
+        username: null
+    });
 };

@@ -9,6 +9,7 @@ export default class Email {
 
     async getInbox() {
         try {
+            console.log('getting for',this.objNetwork.name);
             let inbox = new Inbox({
                 user: this.objNetwork.name,
                 password: this.objNetwork.password,
@@ -16,6 +17,8 @@ export default class Email {
                 port: 993,
                 tls: true
             });
+            inbox.on('error', (err) => console.log('Failed to connect', err))
+            console.log('connecting')
             await inbox.connect(true);
             let numMessages = inbox.inbox.messages.total;
             console.log('Downloading', numMessages, 'messages');
