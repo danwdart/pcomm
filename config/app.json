@@ -9,15 +9,15 @@
         "facebook": {
             "clientID": "431625730372378",
             "clientSecret": "c5ab2ee092b238cb1f6396df8a617057",
-            "callbackURL": "https://pcomm-dandart.c9users.io/auth/facebook/callback"
+            "callbackURL": "http://dev.pcomm.jolharg.com/auth/facebook/callback"
         },
         "twitter": {
             "consumerKey": "jSI8zfsneEXrbzYtUXg5p32Cj",
             "consumerSecret": "xrsHEkgSu9AqFlVloJWLhVMLv0I8GjlvWPhpWaP6nFqd1ve2rn",
-            "callbackURL": "https://pcomm-dandart.c9users.io/auth/twitter/callback"
+            "callbackURL": "http://dev.pcomm.jolharg.com/auth/twitter/callback"
         },
         "gnusocial": {
-            "callbackURL": "https://pcomm-dandart.c9users.io/auth/gnusocial/callback"
+            "callbackURL": "http://dev.pcomm.jolharg.com/auth/gnusocial/callback"
         }
     }
 }

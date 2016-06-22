@@ -35,6 +35,7 @@ export default class Facebook {
     }
 
     async getFeed() {
+        console.log('getting fb feed')
         try {
             let response = await FB.papi('/me/feed');
 
