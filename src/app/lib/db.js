@@ -1,3 +1,3 @@
 import mongoose from 'mongoose';
-
-mongoose.connect('mongodb://localhost/pcomm');
+export default (dbhost) =>
+    mongoose.connect('mongodb://'+dbhost+'/pcomm');
