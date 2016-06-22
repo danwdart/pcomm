@@ -7,21 +7,21 @@ export async function LoginCtrl(req, res) {
     if (!user)
         return res.status(401).send({error: 'Invalid Credentials'});
 
-    if (!passwordhash.verify(req.body.password, user.password)) 
-        return res.status(401).send({error: 'Invalid Cdedentials'});
-    
+    if (!passwordhash.verify(req.body.password, user.password))
+        return res.status(401).send({error: 'Invalid Credentials'});
+
     req.session.user = user;
-    
+
     return res.status(204).send('');
 };
 
-export async function RegisterCtrl(req, res) {    
+export async function RegisterCtrl(req, res) {
     let user = await User.findOne({username: req.body.username});
-        
+
     if (user) {
         return res.status(400).send({error:'User exists'});
     }
-    
+
     user = new User({
         username: req.body.username,
         password: passwordhash.generate(
@@ -31,7 +31,7 @@ export async function RegisterCtrl(req, res) {
             }
         )
     });
-            
+
     try {
         await user.save();
     } catch(err) {
