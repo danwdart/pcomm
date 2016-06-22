@@ -118,7 +118,7 @@ module.exports = function(grunt) {
             pcomm: {
                 cwd: 'public',
                 src: 'views/**/*.html',
-                dest: 'src/public/js/lib/templates.js',
+                dest: 'public/src/js/lib/templates.js',
                 options: {
                     bootstrap: function(module, script) {
                         return 'export default (ngApp) => ngApp.run([\'$templateCache\', ($templateCache) => {'+script+'}]);';
