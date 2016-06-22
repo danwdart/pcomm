@@ -1,10 +1,9 @@
 .row
     .col-lg-2
         .row
-            button.btn.btn-success.col-lg-12(ng-click="compose()")
+            button.btn.btn-success.col-lg-12.spacearound(ng-click="compose()")
                 i.fa.fa-pencil(title='Compose')
                 span.hidden-sm &nbsp; Compose
-        .row &nbsp;
         .nav.nav-pills.nav-stacked.folders
             li(ng-class="{active:isFolderActive('inbox')}")
                 a(href='#/inbox#inbox')
@@ -27,13 +26,13 @@
                     i.fa.fa-envelope
                     span.hidden-sm &nbsp; All Mail
             li(ng-class="{active:isFolderActive('spam')}")
-                a(href='#/inbox/#spam') 
+                a(href='#/inbox/#spam')
                     i.fa.fa-warning
                     span.hidden-sm &nbsp; Spam
             li(ng-class="{active:isFolderActive('recycling')}")
                 a(href='#/inbox/#recycling')
                     i.fa.fa-trash
-                    span.hidden-sm &nbsp; Recycling                
+                    span.hidden-sm &nbsp; Recycling
             li(ng-repeat="folder in folders",ng-class="{active:isFolderActive(folder.name)}")
                 a(href='#inbox/#{{folder.name}}')
                     i(ng-class="'fa fa-'+(('email' == folder.type)?'envelope':folder.type)")
@@ -42,16 +41,16 @@
         include ./compose
         row
             .col-lg-12
-                button.btn.btn-default.col-lg-2
+                button.btn.btn-default.col-lg-2.spacearound
                     i.fa.fa-archive
                     span.hidden-sm &nbsp; Archive
-                button.btn.btn-default.col-lg-2
+                button.btn.btn-default.col-lg-2.spacearound
                     i.fa.fa-warning
                     span.hidden-sm &nbsp; Spam
-                button.btn.btn-default.col-lg-2
+                button.btn.btn-default.col-lg-2.spacearound
                     i.fa.fa-envelope
                     span.hidden-sm &nbsp; Mark as Read
-                
+
         table.messages.table.table-striped.table-hover
             thead
                 tr
@@ -131,4 +130,3 @@
                                                     .btn.btn-danger
                                                         i.fa.fa-close
                                                         span.hidden-sm &nbsp; Discard
-                                    
