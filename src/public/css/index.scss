@@ -1,5 +1,17 @@
 @charset "UTF-8";
 
+.container-fluid {
+    margin: 0 10px;
+}
+
+.nav {
+    margin: 10px 0;
+}
+
+.spacearound {
+    margin: 10px;
+}
+
 a {
     cursor: pointer;
 }
