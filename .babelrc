@@ -1,9 +1,9 @@
 {
     "presets": [
-        "es2015",
         "stage-0"
     ],
     "plugins": [
-        "syntax-async-functions"
+        "syntax-async-functions",
+        "transform-es2015-modules-commonjs"
     ]
 }

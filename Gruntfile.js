@@ -222,9 +222,7 @@ module.exports = function(grunt) {
         jade: {
             all: {
                 options: {
-                    data: function(dest, src) {
-                        return require('./config/locals.json')
-                    }
+                    data: (dest, src) => require('./config/locals.json')
                 },
                 files: [
                     {
