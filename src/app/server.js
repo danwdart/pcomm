@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import express from 'express';
 import http from 'http';
 import sessions from 'client-sessions';
