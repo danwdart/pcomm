@@ -24,7 +24,21 @@ import templates from './templates';
 export default (ngApp, jQuery) => {
     templates(ngApp);
 
-    ngApp.config(
+    ngApp.run(
+        [
+            '$rootScope',
+            ($rootScope) =>
+                $rootScope.$on(
+                    '$routeChangeStart',
+                    (next, last) => {
+                        if ($rootScope.clearFlash)
+                            $rootScope.flash = {};
+                        if (0 < Object.keys($rootScope.flash).length)
+                            $rootScope.clearFlash = true;
+                    }
+                )
+        ])
+        .config(
         [
             '$routeProvider',
             //'$locationProvider',

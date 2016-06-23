@@ -12,7 +12,10 @@ export async function LoginCtrl(req, res) {
 
     req.session.user = user;
 
-    return res.status(204).send('');
+    return res.status(200).send({
+        isLoggedIn: true,
+        username: user.username
+    });
 };
 
 export async function RegisterCtrl(req, res) {
@@ -44,7 +47,9 @@ export async function RegisterCtrl(req, res) {
 
 export function LogoutCtrl(req, res) {
     req.session.reset();
-    return res.status(204).send('');
+    return res.status(200).send({
+        isLoggedIn: false
+    });
 };
 
 export function StatusCtrl(req, res) {

@@ -14,7 +14,8 @@ export default ($scope, register, $location, jQuery) => {
 
         // this could probably be better
         if (result.success) {
-            //headerctrl.flashsuccess = 'Successful Registration.'
+            $scope.$root.flash.success = 'Successful Registration.';
+            $scope.$root.$apply();
             $location.path('/');
         }
 
