@@ -9,12 +9,15 @@ export function LoginFactory($http) {
                 }
             );
 
-            if (204 == response.status) {
+            if (200 == response.status)
                 return {
                     isLoggedIn: true,
                     username
-                }
-            }
+                };
+            else
+                return {
+                    error: response.status
+                };
         } catch (err) {
             if (401 == err.status)
                 return {invalid: true}

@@ -1,5 +1,5 @@
 export default async ($scope, isLoggedIn, logout, $location) => {
-    $scope.flashsuccess = null;
+    $scope.$root.flash = {};
     $scope.$root.status = {
         isLoggedIn: false
     };

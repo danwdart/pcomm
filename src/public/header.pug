@@ -33,4 +33,6 @@ nav.col-lg-12
         .big(ng-show='$root.status.isLoggedIn') Logged in as {{$root.status.username}}
 form(ng-submit="search(searchterm)")
     input.form-control.spacearound#search(type='search',placeholder='Search...',ng-model='searchterm')
-.alert.alert-success(ng-cloak,ng-show="null !== flashsuccess",role='alert') {{ flashsuccess }}
+.alert.alert-success.ng-cloak(ng-show="undefined !== $root.flash.success",role='alert') {{ $root.flash.success }}
+.alert.alert-warning.ng-cloak(ng-show="undefined !== $root.flash.warning",role='alert') {{ $root.flash.warning }}
+.alert.alert-danger.ng-cloak(ng-show="undefined !== $root.flash.warning",role='alert') {{ $root.flash.danger }}
