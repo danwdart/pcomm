@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 /* just in case
 app.set('views', __dirname + '/../src/public');
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 */
 
 app.use(express.static(__dirname + '/../public'));

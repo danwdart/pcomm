@@ -219,7 +219,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        jade: {
+        pug: {
             all: {
                 options: {
                     data: (dest, src) => require('./config/locals.json')
@@ -227,13 +227,13 @@ module.exports = function(grunt) {
                 files: [
                     {
                         cwd: 'src/public/views',
-                        src: '**/*.jade',
+                        src: '**/*.pug',
                         dest: 'public/views',
                         expand: true,
                         ext: '.html'
                     },
                     {
-                        src: 'src/public/index.jade',
+                        src: 'src/public/index.pug',
                         dest: 'public/index.html'
                     }
                 ]
@@ -278,7 +278,7 @@ module.exports = function(grunt) {
                 tasks: [
                     'clean',
                     'copy',
-                    'jade',
+                    'pug',
                     'ngtemplates',
                     'clean:views',
                     'browserify',
@@ -314,7 +314,7 @@ module.exports = function(grunt) {
                 tasks: [
                     'eslint:public',
                     'copy:js',
-                    'jade',
+                    'pug',
                     'ngtemplates',
                     'clean:views',
                     'browserify:app',
@@ -363,11 +363,11 @@ module.exports = function(grunt) {
                 },
                 files: [
                     'config/locals.json',
-                    'src/public/*.jade',
+                    'src/public/*.pug',
                     'src/public/views/**'
                 ],
                 tasks: [
-                    'jade',
+                    'pug',
                     'ngtemplates',
                     'clean:views',
                     'appcache'
@@ -397,7 +397,7 @@ module.exports = function(grunt) {
             'copy',
             'eslint',
             'babel',
-            'jade',
+            'pug',
             'ngtemplates',
             'clean:views',
             'browserify',
@@ -415,7 +415,7 @@ module.exports = function(grunt) {
             'copy',
             'eslint',
             'babel',
-            'jade',
+            'pug',
             'ngtemplates',
             'clean:views',
             'browserify:app',
