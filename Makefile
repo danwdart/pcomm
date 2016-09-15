@@ -51,7 +51,7 @@ pug:
 	pug -O config/locals.json public/src -o public
 
 appcache:
-	cd public && node-appcache -d .
+	cd public && echo "*" | node-appcache -n /dev/stdin -d .
 
 start:
 	forever start -a -l forever.out -o pcomm.out -e pcomm.err -p logs app/server.js
