@@ -1,4 +1,4 @@
-export default async ($scope, settings, jQuery) => {
+export default async function($scope, settings, jQuery) {
     $scope.setupGNUSocial = async () => {
         let context = await swal.withFormAsync(
             {

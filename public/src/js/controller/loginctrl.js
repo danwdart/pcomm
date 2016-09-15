@@ -1,4 +1,4 @@
-export default ($scope, login, $location, jQuery) => {
+export default function($scope, login, $location, jQuery) {
     $scope.username = null;
     $scope.password = null;
     $scope.showInvalid = false;

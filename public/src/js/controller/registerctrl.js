@@ -1,4 +1,4 @@
-export default ($scope, register, $location, jQuery) => {
+export default function($scope, register, $location, jQuery) {
     $scope.username = null;
     $scope.password = null;
     $scope.password2 = null;

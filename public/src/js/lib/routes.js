@@ -1,3 +1,6 @@
+import angular from 'angular';
+import 'angular-route';
+
 import HeaderCtrl from '../controller/headerctrl';
 import IndexCtrl from '../controller/indexctrl';
 import InboxCtrl from '../controller/inboxctrl';
@@ -19,11 +22,7 @@ import SettingsFactory from '../factory/settingsfactory';
 import FeedFactory from '../factory/feedfactory';
 import InboxFactory from '../factory/inboxfactory';
 
-import templates from './templates';
-
 export default (ngApp, jQuery) => {
-    templates(ngApp);
-
     ngApp.run(
         [
             '$rootScope',
