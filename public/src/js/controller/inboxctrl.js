@@ -1,4 +1,4 @@
-export default async ($scope, inbox, $location) => {
+export default async function($scope, inbox, $location) {
     $scope.isFolderActive = (id) => id == $location.hash() ||
         ('inbox' == id && '' == $location.hash());
 

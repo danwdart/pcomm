@@ -1,0 +1,6 @@
+@import "bootstrap";
+@import "bootstrap/dist/css/bootstrap-theme";
+@import "font-awesome";
+@import "sweetalert/dist/sweetalert";
+@import "sweetalert/themes/twitter/twitter";
+@import "swal-forms/swal-forms";

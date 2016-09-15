@@ -1,4 +1,4 @@
-export default async ($scope, feed, $location) => {
+export default async function($scope, feed, $location) {
     $scope.select = (id) => {
         $location.path('/message/' + id);
     };

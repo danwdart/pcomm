@@ -1,7 +1,12 @@
 /node_modules
 /bower_components
 /compiled
-/public
+/public/js
+/public/css
+/public/views
+/public/fonts
+/public/*.html
+/public/*appcache*
 /app
 /logs
 src/public/js/lib/templates.js
