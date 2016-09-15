@@ -36,7 +36,8 @@
     "node-sass": "^3.10.0",
     "npm-css": "^0.2.3",
     "pug-cli": "^1.0.0-alpha6",
-    "rework-npm-cli": "^0.1.1"
+    "rework-npm-cli": "^0.1.1",
+    "watchy": "^0.6.6"
   },
   "dependencies": {
     "angular": "^1.5.8",
