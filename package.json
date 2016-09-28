@@ -24,6 +24,7 @@
     "babel-eslint": "^6.1.2",
     "babel-plugin-syntax-async-functions": "^6.3.13",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.10.3",
+    "babel-preset-babili": "0.0.3",
     "babel-preset-stage-0": "^6.3.13",
     "babelify": "^7.2.0",
     "bootstrap": "^3.3.7",
