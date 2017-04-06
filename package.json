@@ -48,7 +48,7 @@
     "client-sessions": "^0.7.0",
     "es6-promisify": "^3.0.0",
     "express": "^4.13.3",
-    "fb": "^0.7.3",
+    "fb": "^1.0.0",
     "feedparser": "^1.1.4",
     "font-awesome": "^4.6.3",
     "jquery": "^3.1.0",
