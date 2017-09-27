@@ -10,3 +10,6 @@ patch:
         patched: '2017-05-25T04:55:05.811Z'
     - socket.io > socket.io-adapter > debug > ms:
         patched: '2017-05-25T04:55:05.811Z'
+  'npm:debug:20170905':
+    - mongoose > mquery > debug:
+        patched: '2017-09-27T04:24:07.151Z'
