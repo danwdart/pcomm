@@ -1,5 +1,7 @@
 # pComm: Portable Communicator
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/danwdart/pcomm.svg)](https://greenkeeper.io/)
+
 ## What's it for?
 
 pComm's aim is to be able to communicate with all the popular social media, messaging and sharing platforms in one interface, available on desktop and phone versions, and showing all messages for a person, replyable and sharable in a common view.
