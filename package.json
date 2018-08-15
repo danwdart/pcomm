@@ -26,7 +26,7 @@
   "devDependencies": {
     "@babel/cli": "7.0.0-rc.1",
     "@babel/core": "7.0.0-rc.1",
-    "@babel/plugin-proposal-function-bind": "7.0.0-beta.55",
+    "@babel/plugin-proposal-function-bind": "7.0.0-rc.1",
     "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.55",
     "babel-eslint": "^8.2.3",
     "babel-plugin-syntax-async-functions": "^6.13.0",
