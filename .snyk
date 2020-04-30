@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.12.0
+version: v1.14.1
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:mime:20170907':
@@ -36,3 +36,30 @@ patch:
   'npm:tunnel-agent:20170305':
     - node-sass > request > tunnel-agent:
         patched: '2018-06-26T07:45:52.927Z'
+  SNYK-JS-LODASH-567746:
+    - '@babel/core > lodash':
+        patched: '2020-04-30T23:10:13.309Z'
+    - node-sass > lodash:
+        patched: '2020-04-30T23:10:13.309Z'
+    - '@babel/plugin-transform-modules-commonjs > @babel/helper-module-transforms > lodash':
+        patched: '2020-04-30T23:10:13.309Z'
+    - node-sass > sass-graph > lodash:
+        patched: '2020-04-30T23:10:13.309Z'
+    - '@babel/core > @babel/helpers > @babel/traverse > lodash':
+        patched: '2020-04-30T23:10:13.309Z'
+    - node-sass > gaze > globule > lodash:
+        patched: '2020-04-30T23:10:13.309Z'
+    - '@babel/plugin-transform-modules-commonjs > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > lodash':
+        patched: '2020-04-30T23:10:13.309Z'
+    - '@babel/plugin-transform-modules-commonjs > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/generator > lodash':
+        patched: '2020-04-30T23:10:13.309Z'
+    - pug-cli > pug > pug-code-gen > constantinople > babel-types > lodash:
+        patched: '2020-04-30T23:10:13.309Z'
+    - pug-cli > pug > pug-filters > constantinople > babel-types > lodash:
+        patched: '2020-04-30T23:10:13.309Z'
+    - '@babel/plugin-transform-modules-commonjs > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2020-04-30T23:10:13.309Z'
+    - pug-cli > pug > pug-code-gen > pug-attrs > constantinople > babel-types > lodash:
+        patched: '2020-04-30T23:10:13.309Z'
+    - '@babel/plugin-transform-modules-commonjs > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash':
+        patched: '2020-04-30T23:10:13.309Z'
