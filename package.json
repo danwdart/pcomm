@@ -73,7 +73,7 @@
     "request": "^2.88.0",
     "simple-imap-inbox": "^0.1.8",
     "smtp-connection": "^4.0.2",
-    "snyk": "^1.288.0",
+    "snyk": "^1.316.1",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
     "swal-forms": "^0.5.0",
