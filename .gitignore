@@ -10,3 +10,6 @@
 /app
 /logs
 src/public/js/lib/templates.js
+
+.direnv
+result*
