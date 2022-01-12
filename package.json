@@ -74,7 +74,7 @@
     "simple-imap-inbox": "^0.1.8",
     "smtp-connection": "^4.0.2",
     "snyk": "^1.685.0",
-    "socket.io": "^3.0.4",
+    "socket.io": "^3.1.0",
     "socket.io-client": "^3.0.4",
     "swal-forms": "^0.5.0",
     "sweetalert": "^2.1.2",
